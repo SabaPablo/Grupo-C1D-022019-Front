@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import Home from './Home';
-import Root from './Root';
 import Contact from "./Contacts";
 import Users from "./Users";
 
@@ -10,8 +9,8 @@ import Users from "./Users";
 
 
 export default class App extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             name: '',
         };
@@ -20,11 +19,11 @@ export default class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-                    <Switch>
-                        <Route path="/home" render={props => <Home {...props} />} />
-                        <Route path="/contacts" render={props => <Contact {...props} />}  />
-                        <Route path="/Users" render={props => <Users {...props} />}  />
-                    </Switch>
+                <Switch>
+                    <Route path="/home" render={props => <Home {...props} />} />
+                    <Route path="/contacts" render={props => <Contact {...props} />}  />
+                    <Route path="/Users" render={props => <Users {...props} />}  />
+                </Switch>
             </BrowserRouter>
         );
     }
