@@ -6,6 +6,7 @@ import Contact from "./Contacts";
 import NavBar from "./navBar"
 import Users from "./Users";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import Menues from "./Menues";
 
 const theme = createMuiTheme({
     palette: {
@@ -33,17 +34,20 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider theme={theme}>
-                <BrowserRouter>
-                    <NavBar>
-                        <Switch>
-                            <Route path="/" render={props => <Home {...props} />} />
-                            <Route path="/contacts" render={props => <Contact {...props} />}  />
-                            <Route path="/Users" render={props => <Users {...props} />}  />
-                        </Switch>
-                    </NavBar>
-                </BrowserRouter>
-            </MuiThemeProvider>
+            <div>
+                <MuiThemeProvider theme={theme}>
+                    <BrowserRouter>
+                        <NavBar/>
+                            <Switch>
+                                <Route path="/Album" render={props => <Menues {...props}/>}/>
+                                <Route path="/" render={props => <Home {...props} />} />
+                                <Route path="/contacts" render={props => <Contact {...props} />}  />
+                                <Route path="/Users" render={props => <Users {...props} />}  />
+                            </Switch>
+
+                    </BrowserRouter>
+                </MuiThemeProvider>
+            </div>
         );
     }
 }
