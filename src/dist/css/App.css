@@ -1,11 +1,12 @@
 body {
-  background-color: white;
+  background-color: greenyellow;
   display: flex;
   justify-content: center;
 }
 .container {
   display: block;
-  width: 500px;
+  width: 100%;
+
   margin-top: 120px;
 }
 .title {
