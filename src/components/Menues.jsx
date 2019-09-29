@@ -51,21 +51,20 @@ export default function Menues( { menues } ) {
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
                     <Grid container spacing={4}>
-                        {menues.map((menu, index, array) => (
+                        {
+                            menues.map((menu, index, array) => (
                             <Grid item key={menu} xs={12} sm={6} md={4}>
                                 <MenuCard menu={menues[index]}/>
                             </Grid>
-                        ))}
+                        ))
+                        }
                     </Grid>
                 </Container>
             </main>
             {/* Footer */}
             <footer className={classes.footer}>
                 <Typography variant="h6" align="center" gutterBottom>
-                    Footer
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                    Something here to give the footer a purpose!
+                    12 Cactus
                 </Typography>
              </footer>
             {/* End footer */}

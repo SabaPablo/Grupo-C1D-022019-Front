@@ -1,6 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import Home from './Home';
 import Contact from "./Contacts";
 import NavBar from "./navBar"
@@ -38,6 +37,7 @@ export default class App extends React.Component {
                 <MuiThemeProvider theme={theme}>
                     <BrowserRouter>
                         <NavBar/>
+
                             <Switch>
                                 <Route path="/Album" render={props => <Menues {...props}/>}/>
                                 <Route path="/" render={props => <Home {...props} />} />
