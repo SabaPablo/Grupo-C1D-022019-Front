@@ -11,9 +11,8 @@ class Home extends Component{
         };
     }
 
-
     componentDidMount() {
-        fetch('http://localhost:8080/api/menus')
+        fetch((process.env.API_URL || 'http://localhost:8080/') + 'api/menus')
             .then(res => res.json())
             .then((data) => {
                 this.setState({ menues: data })
