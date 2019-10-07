@@ -4,10 +4,14 @@ import './dist/css/index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import {Container} from "@material-ui/core";
+import history from './components/History';
+import { Router } from "react-router-dom";
 
 ReactDOM.render(
     <Container>
-        <App />
+        <Router history={history}>
+            <App />
+        </Router>
     </Container>,
     document.getElementById('root'));
 

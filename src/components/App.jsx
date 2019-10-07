@@ -1,12 +1,12 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import {Redirect, Route, Switch} from 'react-router-dom';
 import Home from './Home';
 import Contact from "./Contacts";
 import NavBar from "./navBar"
 import Users from "./Users";
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
-import Menues from "./Menues";
-
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import SignIn from "./Login";
+import {Album} from "@material-ui/icons";
 
 const theme = createMuiTheme({
     palette: {
@@ -24,7 +24,9 @@ const theme = createMuiTheme({
         },
     },
 });
-export default class App extends React.Component {
+
+
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,23 +34,31 @@ export default class App extends React.Component {
         };
     }
 
+
+
+
+
     render() {
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
-                    <BrowserRouter>
-                        <NavBar/>
-
-                            <Switch>
-                                <Route path="/Album" render={props => <Menues {...props}/>}/>
-                                <Route path="/" render={props => <Home {...props} />} />
-                                <Route path="/contacts" render={props => <Contact {...props} />}  />
-                                <Route path="/Users" render={props => <Users {...props} />}  />
-                            </Switch>
-
-                    </BrowserRouter>
+                        <Switch>
+                            <div>
+                                <Route path="/">
+                                    <NavBar />
+                                    <Route exact path="/Home" component={Home} />
+                                    <Route exact path="/album" component={Album} />
+                                    <Route exact path="/contacs" component={Contact} />
+                                    <Route exact path="/users" component={Users} />
+                                </Route>
+                                <Route exact path="/login" component={SignIn}/>
+                            </div>
+                        </Switch>
                 </MuiThemeProvider>
             </div>
         );
     }
+
 }
+
+export default App;
