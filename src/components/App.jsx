@@ -7,6 +7,7 @@ import Users from "./Users";
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import SignIn from "./Login";
 import {Album} from "@material-ui/icons";
+import {observable} from "mobx";
 
 const theme = createMuiTheme({
     palette: {
@@ -23,6 +24,18 @@ const theme = createMuiTheme({
             contrastText: '#000',
         },
     },
+});
+
+const appState = observable({
+    name: "",
+    pass: "",
+
+    addName: (name) => {
+        appState.name = name
+    },
+    addPass: (pass) => {
+        appState.pass = pass
+    }
 });
 
 
@@ -51,7 +64,9 @@ class App extends React.Component {
                                     <Route exact path="/contacs" component={Contact} />
                                     <Route exact path="/users" component={Users} />
                                 </Route>
+                                <Route>
                                 <Route exact path="/login" component={SignIn}/>
+                                </Route>
                             </div>
                         </Switch>
                 </MuiThemeProvider>
