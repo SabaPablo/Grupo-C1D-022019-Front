@@ -9,8 +9,50 @@ import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
 
+const host= "http://localhost:8080";
+
 class Users extends Component{
-    createUser;
+
+    constructor(props) {
+        super(props);
+        this.state ={
+                name: '1'
+        };
+    }
+
+    changeProperty = (e) => {
+        let value = e.target.value;
+        let property = e.target.name;
+        this.setState({
+            [property]: value
+        });
+    };
+
+    createUser = () => {
+        fetch(host + "/api/clients", {
+
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify( this.state )
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw Error(res.statusText);
+                }
+            })
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    token: json
+                });
+            })
+            .catch(error => console.error(error));    };
+
     render(){
         return (
             <div>
@@ -22,11 +64,12 @@ class Users extends Component{
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="firstName"
-                                name="firstName"
+                                id="name"
+                                name="name"
                                 label="Nombre"
                                 fullWidth
                                 autoComplete="fname"
+                                onChange={this.changeProperty}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -47,6 +90,7 @@ class Users extends Component{
                                 label="Mail"
                                 fullWidth
                                 autoComplete="email"
+                                onChange={this.changeProperty}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -102,8 +146,8 @@ class Users extends Component{
                         variant="contained"
                         color="primary"
                         onClick={this.createUser}
-                        className={classes.button}
-                    >{i18n.t('Register.label')}
+                        className={classes.button}>
+                        {i18n.t('Register.label')}
                     </Button>
                 </React.Fragment>
             </div>
