@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import i18next from "i18next";
+import i18n from "../i18n";
 
 const useStyles = makeStyles(theme => ({
     '@global': {
@@ -49,7 +51,7 @@ export default function SignIn() {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    {i18n.t('SignIn.label')}
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
@@ -58,7 +60,7 @@ export default function SignIn() {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label={i18n.t('Mail.label')}
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -69,14 +71,14 @@ export default function SignIn() {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={i18n.t("Password.label")}
                         type="password"
                         id="password"
                         autoComplete="current-password"
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
+                        label={i18n.t("RememberMe.label")}
                     />
                     <Button
                         type="submit"
@@ -85,17 +87,17 @@ export default function SignIn() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        {i18n.t('SignIn.label')}
                     </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
-                                Forgot password?
+                                {i18n.t('ForgotPassword.label')}
                             </Link>
                         </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                {i18n.t("DontHaveAccount.label")}
                             </Link>
                         </Grid>
                     </Grid>

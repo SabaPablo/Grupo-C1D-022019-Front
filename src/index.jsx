@@ -7,7 +7,7 @@ import {Container} from "@material-ui/core";
 import history from './components/History';
 import { Router } from "react-router-dom";
 
-import Users from './components/Users'
+import Login from './components/Login'
 import {I18nextProvider} from "react-i18next";
 import i18n from "./i18n";
 
@@ -15,7 +15,7 @@ ReactDOM.render(
     <Container>
         <I18nextProvider i18n={i18n}>
             <Router history={history}>
-                <Users />
+                <Login />
             </Router>
         </I18nextProvider>,
     </Container>,
