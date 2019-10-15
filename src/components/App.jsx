@@ -6,7 +6,7 @@ import NavBar from "./navBar"
 import Users from "./Users";
 import SignIn from "./Login";
 import {Album} from "@material-ui/icons";
-import {Redirect, Router, Switch} from "react-router";
+import {Router, Switch} from "react-router";
 import history from "./History";
 
 
