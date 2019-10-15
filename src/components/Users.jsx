@@ -58,7 +58,7 @@ class Users extends Component{
             <div>
                 <React.Fragment>
                     <Typography variant="h6" gutterBottom>
-                        Registro de usuario
+                        {i18n.t('UserRegister.label')}
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
@@ -66,7 +66,7 @@ class Users extends Component{
                                 required
                                 id="name"
                                 name="name"
-                                label="Nombre"
+                                label={i18n.t("FirstName.label")}
                                 fullWidth
                                 autoComplete="fname"
                                 onChange={this.changeProperty}
@@ -77,7 +77,7 @@ class Users extends Component{
                                 required
                                 id="lastName"
                                 name="lastName"
-                                label="Apellido"
+                                label={i18n.t("LastName.label")}
                                 fullWidth
                                 autoComplete="lname"
                             />
@@ -87,7 +87,7 @@ class Users extends Component{
                                 required
                                 id="mail"
                                 name="mail"
-                                label="Mail"
+                                label={i18n.t('Mail.label')}
                                 fullWidth
                                 autoComplete="email"
                                 onChange={this.changeProperty}
@@ -97,7 +97,7 @@ class Users extends Component{
                             <TextField
                                 id="address"
                                 name="address"
-                                label="Dirección"
+                                label={i18n.t("Address.label")}
                                 fullWidth
                                 autoComplete="billing address-line2"
                             />
@@ -107,20 +107,20 @@ class Users extends Component{
                                 required
                                 id="city"
                                 name="city"
-                                label="Partido"
+                                label={i18n.t("City.label")}
                                 fullWidth
                                 autoComplete="billing address-level2"
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField required id="state" name="state" label="Provincia" fullWidth />
+                            <TextField required id="state" name="state" label={i18n.t("State.label")} fullWidth />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
                                 id="zip"
                                 name="zip"
-                                label="Código postal"
+                                label={i18n.t("ZipCode.label")}
                                 fullWidth
                                 autoComplete="billing postal-code"
                             />
@@ -130,7 +130,7 @@ class Users extends Component{
                                 required
                                 id="country"
                                 name="country"
-                                label="País"
+                                label={i18n.t("Country.label")}
                                 fullWidth
                                 autoComplete="billing country"
                             />
@@ -138,7 +138,7 @@ class Users extends Component{
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-                                label="Acepto haber leido los terminos y condiciones"
+                                label= {i18n.t('TermsAndConditions.label')}
                             />
                         </Grid>
                     </Grid>
