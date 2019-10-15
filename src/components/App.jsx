@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route, Switch} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import Home from './Home';
 import Contact from "./Contacts";
 import NavBar from "./navBar"
@@ -55,20 +55,18 @@ class App extends React.Component {
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
-                        <Switch>
-                            <div>
-                                <Route path="/">
-                                    <NavBar />
-                                    <Route exact path="/Home" component={Home} />
-                                    <Route exact path="/album" component={Album} />
-                                    <Route exact path="/contacs" component={Contact} />
-                                    <Route exact path="/users" component={Users} />
-                                </Route>
-                                <Route>
-                                <Route exact path="/login" component={SignIn}/>
-                                </Route>
-                            </div>
-                        </Switch>
+                    <div>
+                        <Route path="/">
+                            <NavBar />
+                            <Route exact path="/Home" component={Home} />
+                            <Route exact path="/album" component={Album} />
+                            <Route exact path="/contacs" component={Contact} />
+                            <Route exact path="/users" component={Users} />
+                        </Route>
+                        <Route>
+                        <Route exact path="/login" component={SignIn}/>
+                        </Route>
+                    </div>
                 </MuiThemeProvider>
             </div>
         );
