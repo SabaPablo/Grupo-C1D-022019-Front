@@ -5,7 +5,6 @@ import Contact from "./Contacts";
 import NavBar from "./navBar"
 import Users from "./Users";
 import SignIn from "./Login";
-import {Album} from "@material-ui/icons";
 import {Router, Switch} from "react-router";
 import history from "./History";
 
@@ -23,11 +22,11 @@ class App extends React.Component {
                 <Router history={history}>
                     <Switch>
                         <Route exact path="/login" component={SignIn}/>
+                        <Route exact path="/register" component={Users} />
                         <Route path="/">
 
                             <NavBar />
                             <Route exact path="/Home" component={Home} />
-                            <Route exact path="/album" component={Album} />
                             <Route exact path="/contacts" component={Contact} />
                             <Route exact path="/users" component={Users} />
                         </Route>

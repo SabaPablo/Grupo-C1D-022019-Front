@@ -44,6 +44,9 @@ class SignIn extends Component{
         },
     }));
 
+    goToRegister= () => {
+        this.props.history.push(`/register`);
+    }
 
     goToHome= () =>{
     this.props.history.push(`/home`);
@@ -104,7 +107,8 @@ class SignIn extends Component{
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link onClick={this.goToRegister}
+                                      href="#" variant="body2">
                                     {i18n.t("DontHaveAccount.label")}
                                 </Link>
                             </Grid>
