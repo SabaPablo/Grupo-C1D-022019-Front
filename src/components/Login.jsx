@@ -49,7 +49,8 @@ class SignIn extends Component{
     }
 
     goToHome= () =>{
-    this.props.history.push(`/home`);
+        sessionStorage.setItem('login', 'ok');
+        this.props.history.push(`/home`);
     };
 
     render() {

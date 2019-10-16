@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import history from "./History";
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -99,6 +100,13 @@ export default function PrimarySearchAppBar() {
         handleMobileMenuClose();
     }
 
+    function handClose() {
+        sessionStorage.setItem('login', 'off');
+        setAnchorEl(null);
+        handleMobileMenuClose();
+        history.push("/")
+    }
+
     function handleMobileMenuOpen(event) {
         setMobileMoreAnchorEl(event.currentTarget);
     }
@@ -116,6 +124,7 @@ export default function PrimarySearchAppBar() {
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handClose}>Exit</MenuItem>
         </Menu>
     );
 
