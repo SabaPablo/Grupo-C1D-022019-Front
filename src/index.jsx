@@ -11,7 +11,6 @@ import theme from "./theme"
 ReactDOM.render(
     <Container>
         <I18nextProvider i18n={i18n}>
-
                 <MuiThemeProvider theme={theme}>
                     <App/>
                 </MuiThemeProvider>
