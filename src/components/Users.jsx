@@ -15,10 +15,100 @@ class Users extends Component{
 
     constructor(props) {
         super(props);
-        this.state ={
-                name: '1'
+        this.state = {
+            name: null,
+            lastName: null,
+            mail: null,
+            address: null,
+            city: null,
+            state: null,
+            zip: null,
+            country: null,
+            password: null,
+            errors: {
+                name: '',
+                lastName: '',
+                mail: '',
+                address: '',
+                city: '',
+                state: '',
+                zip: '',
+                country: '',
+                password: '',
+            }
         };
     }
+
+    handleChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+
+        switch (name) {
+            case 'name':
+                errors.name =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long name'
+                        : '';
+                break;
+            case 'lastName':
+                errors.lastName =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long lastName'
+                        : '';
+                break;
+            case 'mail':
+                errors.mail ='';
+                    //validEmailRegex.test(value)
+                        //? ''
+                        //: 'Email is not valid!';
+                break;
+            case 'address':
+                errors.address =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long address'
+                        : '';
+                break;
+            case 'city':
+                errors.city =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long city'
+                        : '';
+                break;
+            case 'zip':
+                errors.zip =
+                    (value.length < 4 || value.length >8)
+                        ? 'Error long zip'
+                        : '';
+                break;
+            case 'state':
+                errors.state =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long state'
+                        : '';
+                break;
+            case 'country':
+                errors.country =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long country'
+                        : '';
+                break;
+            case 'password':
+                errors.password =
+                    value.length < 8
+                        ? 'Password must be 8 characters long!'
+                        : '';
+                break;
+            default:
+                break;
+        }
+
+        this.setState({errors, [name]: value}, ()=> {
+            console.log(errors)
+        })
+    };
+
+
 
     changeProperty = (e) => {
         let value = e.target.value;
@@ -69,7 +159,8 @@ class Users extends Component{
                                 label={i18n.t("FirstName.label")}
                                 fullWidth
                                 autoComplete="fname"
-                                onChange={this.changeProperty}
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -80,6 +171,8 @@ class Users extends Component{
                                 label={i18n.t("LastName.label")}
                                 fullWidth
                                 autoComplete="lname"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -90,7 +183,8 @@ class Users extends Component{
                                 label={i18n.t('Mail.label')}
                                 fullWidth
                                 autoComplete="email"
-                                onChange={this.changeProperty}
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -100,6 +194,8 @@ class Users extends Component{
                                 label={i18n.t("Address.label")}
                                 fullWidth
                                 autoComplete="billing address-line2"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -110,10 +206,20 @@ class Users extends Component{
                                 label={i18n.t("City.label")}
                                 fullWidth
                                 autoComplete="billing address-level2"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField required id="state" name="state" label={i18n.t("State.label")} fullWidth />
+                            <TextField
+                                required
+                                id="state"
+                                name="state"
+                                label={i18n.t("State.label")}
+                                fullWidth
+                                onChange={this.handleChange}
+                                noValidate
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -123,6 +229,8 @@ class Users extends Component{
                                 label={i18n.t("ZipCode.label")}
                                 fullWidth
                                 autoComplete="billing postal-code"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -133,6 +241,8 @@ class Users extends Component{
                                 label={i18n.t("Country.label")}
                                 fullWidth
                                 autoComplete="billing country"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12}>

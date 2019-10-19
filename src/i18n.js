@@ -15,6 +15,9 @@ i18next
                     City:{ label: 'City' },
                     Country: { label: 'Country' },
                     DontHaveAccount: { label: 'Don\'t have an account? Sign Up' },
+                    Error:{
+                        Name:{label: 'the name must be between 4 and 30 characters.'}
+                    },
                     FirstName: { label: 'First Name' },
                     ForgotPassword: { label: 'Forgot password?' },
                     LastName: { label: 'Last Name' },
@@ -37,7 +40,9 @@ i18next
                     City:{ label: 'Ciudad' },
                     Country: { label: 'País' },
                     DontHaveAccount: { label: 'No tengo cuenta. Registrarme.' },
-                    FirstName: { label: 'Nombre' },
+                    Error:{
+                        Name:{label: 'El nombre debe tener entr 4 y 30 letras.'}
+                    },FirstName: { label: 'Nombre' },
                     ForgotPassword: { label: 'Olvidé mi contraseña' },
                     LastName: { label: 'Apellido' },
                     Mail: {label: 'Mail' },
