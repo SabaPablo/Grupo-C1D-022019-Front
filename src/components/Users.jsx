@@ -59,7 +59,10 @@ class Users extends Component{
                 break;
             case 'mail':
                 errors.mail ='';
-                    //validEmailRegex.test(value)
+                if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ){
+                    errors.mail="Please enter a valid email address";
+                }
+                //validEmailRegex.test(value)
                         //? ''
                         //: 'Email is not valid!';
                 break;
