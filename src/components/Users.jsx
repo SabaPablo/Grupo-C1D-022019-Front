@@ -19,6 +19,7 @@ class Users extends Component{
             name: null,
             lastName: null,
             mail: null,
+            phone: null,
             address: null,
             city: null,
             state: null,
@@ -29,6 +30,7 @@ class Users extends Component{
                 name: '',
                 lastName: '',
                 mail: '',
+                phone: '',
                 address: '',
                 city: '',
                 state: '',
@@ -56,6 +58,13 @@ class Users extends Component{
                     (value.length < 4 || value.length >30)
                         ? 'Error long lastName'
                         : '';
+                break;
+            case 'password':
+                errors.password ='';
+                if (!(value.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/) && value.length>=8) ){
+                    errors.password="Please enter a valid password";
+                }
+
                 break;
             case 'mail':
                 errors.mail ='';
@@ -94,12 +103,6 @@ class Users extends Component{
                 errors.country =
                     (value.length < 4 || value.length >30)
                         ? 'Error long country'
-                        : '';
-                break;
-            case 'password':
-                errors.password =
-                    value.length < 8
-                        ? 'Password must be 8 characters long!'
                         : '';
                 break;
             default:
@@ -188,6 +191,32 @@ class Users extends Component{
                                 autoComplete="email"
                                 onChange={this.handleChange}
                                 noValidate
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="password"
+                                name="password"
+                                label={i18n.t('Password.label')}
+                                fullWidth
+                                autoComplete="password"
+                                onChange={this.handleChange}
+                                noValidate
+                                type={"password"}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="phone"
+                                name="phone"
+                                label={i18n.t('Phone.label')}
+                                fullWidth
+                                autoComplete="phone"
+                                onChange={this.handleChange}
+                                noValidate
+                                type={"number"}
                             />
                         </Grid>
                         <Grid item xs={12}>
