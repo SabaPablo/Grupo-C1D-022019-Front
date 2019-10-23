@@ -19,6 +19,13 @@ import i18n from "../i18n";
 
 class SignIn extends Component{
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            mail: null,
+            password: null
+        }
+    }
     useStyles = makeStyles(theme => ({
         '@global': {
             body: {
@@ -46,11 +53,39 @@ class SignIn extends Component{
 
     goToRegister= () => {
         this.props.history.push(`/register`);
-    }
+    };
 
     goToHome= () =>{
-        sessionStorage.setItem('login', 'ok');
-        this.props.history.push(`/home`);
+        fetch((process.env.API_URL || 'http://localhost:8080/') + 'api/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                mail: this.state.mail,
+                password: this.state.password
+            })
+        }) .then(res => res.json())
+            .then((data) => {
+                sessionStorage.setItem('login', 'ok');
+                sessionStorage.setItem('user_id', data.id);
+                this.props.history.push(`/home`);
+            })
+            .catch(console.log)
+        this.clearState();
+    };
+
+    clearState(){
+        this.setState({mail: null, password:null})
+    }
+
+    changeProperty = (e) => {
+        let value = e.target.value;
+        let property = e.target.name;
+        this.setState({
+            [property]: value
+        });
     };
 
     render() {
@@ -70,9 +105,10 @@ class SignIn extends Component{
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
+                            id="mail"
                             label={i18n.t('Mail.label')}
-                            name="email"
+                            name="mail"
+                            onChange={this.changeProperty}
                             autoComplete="email"
                             autoFocus
                         />
@@ -85,6 +121,7 @@ class SignIn extends Component{
                             label={i18n.t("Password.label")}
                             type="password"
                             id="password"
+                            onChange={this.changeProperty}
                             autoComplete="current-password"
                         />
                         <FormControlLabel
@@ -92,7 +129,6 @@ class SignIn extends Component{
                             label={i18n.t("RememberMe.label")}
                         />
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             color="primary"
