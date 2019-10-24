@@ -24,11 +24,6 @@ class App extends React.Component {
                     <Route exact path="/register" component={Users} />
                     <Route path="/">
                     <PrivateRoute path="/" component={NavBar} />
-                        <Switch>
-                            <PrivateRoute exact path="/Home" component={Home} />
-                            <PrivateRoute exact path="/contacts" component={Contact} />
-                            <PrivateRoute exact path="/users" component={Users} />
-                        </Switch>
                     </Route>
                 </Switch>
             </Router>

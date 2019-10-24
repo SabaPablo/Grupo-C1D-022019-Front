@@ -56,6 +56,7 @@ class SignIn extends Component{
     };
 
     goToHome= () =>{
+        console.log(this.state.mail)
         fetch((process.env.API_URL || 'http://localhost:8080/') + 'api/login', {
             method: 'POST',
             headers: {
@@ -68,9 +69,12 @@ class SignIn extends Component{
             })
         }) .then(res => res.json())
             .then((data) => {
-                sessionStorage.setItem('login', 'ok');
-                sessionStorage.setItem('user_id', data.id);
-                this.props.history.push(`/home`);
+                if(data.userId > 0 && data.userId !== undefined){
+                console.log(data)
+                    sessionStorage.setItem('login', 'ok');
+                    sessionStorage.setItem('user_id', data.userId);
+                    this.props.history.push(`/home`);
+                }
             })
             .catch(console.log)
         this.clearState();

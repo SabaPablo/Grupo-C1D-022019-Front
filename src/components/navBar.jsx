@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,10 +15,19 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import Menues from "./Menues";
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import PersonIcon from '@material-ui/icons/Person';
+import SettingsIcon from '@material-ui/icons/Settings';
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import HomeIcon from '@material-ui/icons/Home';
 import Home from "./Home";
+import {Route, Switch} from "react-router-dom";
+import {PrivateRoute} from "./PrivateRoute";
+import Contact from "./Contacts";
+import Users from "./Users";
 
 const drawerWidth = 240;
 
@@ -46,6 +55,38 @@ const useStyles = makeStyles(theme => ({
     },
     hide: {
         display: 'none',
+    },
+    search: {
+        position: 'relative',
+        borderRadius: theme.shape.borderRadius,
+        backgroundColor: fade(theme.palette.common.white, 0.15),
+        '&:hover': {
+            backgroundColor: fade(theme.palette.common.white, 0.25),
+        },
+        marginRight: theme.spacing(2),
+        marginLeft: 0,
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            marginLeft: theme.spacing(3),
+            width: 'auto',
+        },
+    },
+    searchIcon: {
+        width: theme.spacing(7),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    inputInput: {
+        padding: theme.spacing(1, 1, 1, 7),
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('md')]: {
+            width: 200,
+        },
     },
     drawer: {
         width: drawerWidth,
@@ -83,6 +124,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+
 export default function MiniDrawer() {
     const classes = useStyles();
     const theme = useTheme();
@@ -94,6 +136,10 @@ export default function MiniDrawer() {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+    const goToHome = () => {
+        console.log('a casa vieja')
+
     };
 
     return (
@@ -117,9 +163,22 @@ export default function MiniDrawer() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Mini variant drawer
+                    <Typography className={classes.title} variant="h6" noWrap>
+                        Viandas YA
                     </Typography>
+                    <div className={classes.search}>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
+                        </div>
+                        <InputBase
+                            placeholder="Search…"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{ 'aria-label': 'search' }}
+                        />
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -143,18 +202,41 @@ export default function MiniDrawer() {
                 </div>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    { [
+                        <ListItem button key={'Inicio'}>
+                            <ListItemIcon>
+                                <HomeIcon onClick={goToHome} />
+                            </ListItemIcon>
+                            <ListItemText primary={'Inicio'} />
+                        </ListItem>,
+                        <ListItem button key={'Perfil'}>
+                            <ListItemIcon>
+                                <PersonIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Perfil'} />
+                        </ListItem>,
+                        <ListItem button key={'Compras'}>
+                            <ListItemIcon>
+                            <ShoppingCartIcon />
+                            </ListItemIcon>
+                        <ListItemText primary={'Compras'} />
+                        </ListItem>,
+                        <ListItem button key={'Ventas'}>
+                            <ListItemIcon>
+                                <ShoppingBasketIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Ventas'} />
+                        </ListItem>,
+
+                        ]
+                    }
+
                 </List>
                 <Divider />
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                    {['Configuración', 'Cerrar sesión'].map((text, index) => (
                         <ListItem button key={text}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                            <ListItemIcon>{index % 2 === 0 ? <SettingsIcon /> : <MeetingRoomIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
                     ))}
@@ -162,7 +244,13 @@ export default function MiniDrawer() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Home/>
+                <Route>
+                    <Switch>
+                        <PrivateRoute exact path="/Home" component={Home} />
+                        <PrivateRoute exact path="/contacts" component={Contact} />
+                        <PrivateRoute exact path="/users" component={Users} />
+                    </Switch>
+                </Route>
             </main>
         </div>
     );
