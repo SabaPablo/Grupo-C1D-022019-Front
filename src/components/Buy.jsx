@@ -8,7 +8,7 @@ import {fade} from "@material-ui/core/styles";
 import axios from 'axios';
 
 
-const Home = () => {
+const Buy = () => {
     const useStyles = makeStyles(theme => ({
 
         hide: {
@@ -108,4 +108,4 @@ const Home = () => {
 
 };
 
-export default Home;
+export default Buy;

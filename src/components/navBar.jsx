@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
+import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -15,8 +15,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
@@ -28,6 +26,9 @@ import {Route, Switch} from "react-router-dom";
 import {PrivateRoute} from "./PrivateRoute";
 import Contact from "./Contacts";
 import Users from "./Users";
+import Sell from "./Sell";
+import Buy from "./Buy";
+import MenuForm from "./MenuForm";
 
 const drawerWidth = 240;
 
@@ -189,19 +190,6 @@ export default function MiniDrawer(props) {
                     <Typography className={classes.title} variant="h6" noWrap>
                         Viandas YA
                     </Typography>
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
-                        <InputBase
-                            placeholder="Search…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -280,6 +268,9 @@ export default function MiniDrawer(props) {
                 <Route>
                     <Switch>
                         <PrivateRoute exact path="/Home" component={Home} />
+                        <PrivateRoute exact path="/cart" component={Buy} />
+                        <PrivateRoute exact path="/sell" component={Sell} />
+                        <PrivateRoute exact path="/menu/add" component={MenuForm} />
                         <PrivateRoute exact path="/contacts" component={Contact} />
                         <PrivateRoute exact path="/users" component={Users} />
                     </Switch>

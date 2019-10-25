@@ -8,7 +8,7 @@ import {fade} from "@material-ui/core/styles";
 import axios from 'axios';
 
 
-const Home = () => {
+const Sell = () => {
     const useStyles = makeStyles(theme => ({
 
         hide: {
@@ -62,6 +62,7 @@ const Home = () => {
         axios.get((process.env.API_URL || 'http://localhost:8080/') + 'api/menus')
             .then(res => {
                 const menues = res.data;
+                menues.push({isAdd: true})
                 setMenues(menues) })
 
     }, []);
@@ -108,4 +109,4 @@ const Home = () => {
 
 };
 
-export default Home;
+export default Sell;

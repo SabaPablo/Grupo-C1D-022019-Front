@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuCard from "./MenuCard";
+import AddCard from "./AddCard";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -21,11 +22,6 @@ const useStyles = makeStyles(theme => ({
         paddingTop: theme.spacing(8),
         paddingBottom: theme.spacing(8),
     },
-    card: {
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-    },
     cardMedia: {
         paddingTop: '56.25%', // 16:9
     },
@@ -40,7 +36,19 @@ const useStyles = makeStyles(theme => ({
 
 //const menues = [{name: "pure", description: "pure de papas con algo de pimienta", urlImage: ""},{name: "milas", description: "como las que hace la abuela", urlImage: "https://www.mexicoenmicocina.com/wp-content/uploads/2019/01/receta-de-milanesa-de-pollo.jpg"}, {name: "tomate"}, {name: "algo"}, {name: "mierda"}, {name: "comida"}];
 
+
+
 export default function Menues( { menues } ) {
+
+    const ExpansionCard = (props) => {
+        const menu = props.menu;
+        if (menu.isAdd) {
+            return <AddCard/>;
+        }
+        return <MenuCard menu={menu}/>
+
+    }
+
     const classes = useStyles();
 
     return (
@@ -54,7 +62,7 @@ export default function Menues( { menues } ) {
                         {
                             menues.map((menu, index, array) => (
                             <Grid item key={menu} xs={12} sm={6} md={4}>
-                                <MenuCard menu={menues[index]}/>
+                                <ExpansionCard menu={menues[index]}/>
                             </Grid>
                         ))
                         }
