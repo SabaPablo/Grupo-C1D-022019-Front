@@ -80,6 +80,9 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    inputRoot: {
+        color: 'inherit',
+    },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 7),
         transition: theme.transitions.create('width'),
@@ -125,7 +128,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -138,8 +141,28 @@ export default function MiniDrawer() {
         setOpen(false);
     };
     const goToHome = () => {
-        console.log('a casa vieja')
+        props.history.push(`/home`);
 
+    };
+    const goToSell = () => {
+        props.history.push(`/sell`);
+
+    };
+    const goToProfile = () => {
+        props.history.push(`/profile`);
+
+    };
+    const goToConfig = () => {
+        props.history.push(`/config`);
+
+    };
+    const goToBuy = () => {
+        props.history.push(`/cart`);
+    };
+    const goOut = () => {
+        sessionStorage.setItem('login', 'off');
+        sessionStorage.setItem('user_id', '0');
+        props.history.push(`/login`);
     };
 
     return (
@@ -203,25 +226,33 @@ export default function MiniDrawer() {
                 <Divider />
                 <List>
                     { [
-                        <ListItem button key={'Inicio'}>
+                        <ListItem button key={'Inicio'}
+                                  onClick={goToHome}
+                        >
                             <ListItemIcon>
                                 <HomeIcon onClick={goToHome} />
                             </ListItemIcon>
                             <ListItemText primary={'Inicio'} />
                         </ListItem>,
-                        <ListItem button key={'Perfil'}>
+                        <ListItem button key={'Perfil'}
+                                  onClick={goToProfile}
+                        >
                             <ListItemIcon>
                                 <PersonIcon />
                             </ListItemIcon>
                             <ListItemText primary={'Perfil'} />
                         </ListItem>,
-                        <ListItem button key={'Compras'}>
+                        <ListItem button key={'Compras'}
+                                  onClick={goToBuy}
+                        >
                             <ListItemIcon>
                             <ShoppingCartIcon />
                             </ListItemIcon>
                         <ListItemText primary={'Compras'} />
                         </ListItem>,
-                        <ListItem button key={'Ventas'}>
+                        <ListItem button key={'Ventas'}
+                                  onClick={goToSell}
+                        >
                             <ListItemIcon>
                                 <ShoppingBasketIcon />
                             </ListItemIcon>
@@ -235,7 +266,9 @@ export default function MiniDrawer() {
                 <Divider />
                 <List>
                     {['Configuración', 'Cerrar sesión'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text}
+                                  onClick={index %2 === 0 ? goToConfig: goOut}
+                        >
                             <ListItemIcon>{index % 2 === 0 ? <SettingsIcon /> : <MeetingRoomIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
