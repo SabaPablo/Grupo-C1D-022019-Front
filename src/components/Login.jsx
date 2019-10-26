@@ -15,8 +15,6 @@ import Container from '@material-ui/core/Container';
 import i18n from "../i18n";
 
 
-
-
 class SignIn extends Component{
 
     constructor(props) {

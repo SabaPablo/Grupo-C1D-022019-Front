@@ -29,8 +29,6 @@ import Users from "./Users";
 import Sell from "./Sell";
 import Buy from "./Buy";
 import MenuForm from "./MenuForm";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 const drawerWidth = 240;
 
