@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../dist/css/App.css';
 import Menues from "./Menues";
 import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
@@ -103,6 +103,7 @@ const Home = () => {
                     />
                 </div>
                 <Menues menues={menues}/>
+
             </div>
         );
 

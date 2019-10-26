@@ -40,15 +40,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Menues( { menues } ) {
 
-    const ExpansionCard = (props) => {
-        const menu = props.menu;
-        if (menu.isAdd) {
-            return <AddCard/>;
-        }
-        return <MenuCard menu={menu}/>
-
-    }
-
     const classes = useStyles();
 
     return (
@@ -62,7 +53,7 @@ export default function Menues( { menues } ) {
                         {
                             menues.map((menu, index, array) => (
                             <Grid item key={menu} xs={12} sm={6} md={4}>
-                                <ExpansionCard menu={menues[index]}/>
+                                <MenuCard menu={menues[index]}/>
                             </Grid>
                         ))
                         }

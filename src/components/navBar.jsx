@@ -29,6 +29,8 @@ import Users from "./Users";
 import Sell from "./Sell";
 import Buy from "./Buy";
 import MenuForm from "./MenuForm";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/core/SvgIcon/SvgIcon";
 
 const drawerWidth = 240;
 
@@ -262,7 +264,9 @@ export default function MiniDrawer(props) {
                         </ListItem>
                     ))}
                 </List>
+
             </Drawer>
+
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Route>
@@ -276,6 +280,7 @@ export default function MiniDrawer(props) {
                     </Switch>
                 </Route>
             </main>
+
         </div>
     );
 }
