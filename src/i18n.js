@@ -11,6 +11,7 @@ i18next
         resources: {
             en: {
                 translation: {
+                    AddMenu: { label: 'Add' },
                     Address: { label: 'Address' },
                     City:{ label: 'City' },
                     Country: { label: 'Country' },
@@ -34,7 +35,7 @@ i18next
                     Phone: { label: 'Phone'},
                     Price: { label: 'Price'},
                     PriceCantMax: { label: 'Price exceeded the maximum quantity' },
-                    priceCantMin: { label: 'Price exceeded the minimum quantity' },
+                    PriceCantMin: { label: 'Price exceeded the minimum quantity' },
                     Register: { label: 'Register' },
                     RememberMe: { label: 'Remember Me'},
                     SignIn: { label: 'Sign In' },
@@ -49,6 +50,7 @@ i18next
             },
             es: {
                 translation: {
+                    AddMenu: { label: 'Agregar Menú' },
                     Address: { label: 'Dirección'},
                     City:{ label: 'Ciudad' },
                     Country: { label: 'País' },
@@ -72,7 +74,7 @@ i18next
                     Phone: { label: 'Telefono'},
                     Price: { label: 'Precio'},
                     PriceCantMax: { label: 'Precio superado la cantidad máxima' },
-                    priceCantMin: { label: 'Precio superado la cantidad mínima' },
+                    PriceCantMin: { label: 'Precio superado la cantidad mínima' },
                     Register: { label: 'Registro', },
                     RememberMe: { label: 'Recordar'},
                     SignIn: {label: 'Ingresar' },

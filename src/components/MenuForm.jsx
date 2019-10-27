@@ -15,28 +15,30 @@ class MenuForm extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            idProvider: sessionStorage.getItem('user_id'),
             name: null,
             description: null,
-            maxQuantityPerDay: null,
-            minQuantity: null,
-            maxQuantity: null,
+            category: "alimento",
+            cantMaxPeerDay: null,
+            cantMin: null,
+            cantMax: null,
             price: null,
-            priceCantMin: null,
-            priceCantMax: null,
-            deliveryValue: null,
+            priceMin: null,
+            priceMax: null,
+            priceDelivery: null,
             fchSince: null,
             fchUntil: null,
             urlImage:null,
             errors: {
                 name: '',
                 description: '',
-                maxQuantityPerDay: '',
-                minQuantity: '',
-                maxQuantity: '',
+                cantMaxPeerDay: '',
+                cantMin: '',
+                cantMax: '',
                 price: '',
-                priceCantMin: '',
-                priceCantMax: '',
-                deliveryValue: '',
+                priceMin: '',
+                priceMax: '',
+                priceDelivery: '',
                 fchSince: '',
                 fchUntil: '',
                 urlImage:''
@@ -68,38 +70,38 @@ class MenuForm extends Component{
                         ? 'Error long price'
                         : '';
                 break;
-            case 'maxQuantityPerDay':
-                errors.maxQuantityPerDay =
+            case 'cantMaxPeerDay':
+                errors.cantMaxPeerDay =
                     (value < 0)
                         ? 'Error maxQuantity Per Day'
                         : '';
                 break;
-            case 'minQuantity':
-                errors.minQuantity =
-                    (value < 10 || value > 70 || value < this.state.maxQuantity)
+            case 'cantMin':
+                errors.cantMin =
+                    (value < 10 || value > 70 || value < this.state.cantMax)
                         ? 'Error cant mim'
                         : '';
                 break;
-            case 'priceCantMin':
-                errors.priceCantMin =
-                    (value < 0 || value > 1000 || value > this.state.price || value < this.state.priceCantMax)
+            case 'priceMin':
+                errors.priceMin =
+                    (value < 0 || value > 1000 || value > this.state.price || value < this.state.priceMax)
                         ? 'Error price cant min'
                         : '';
                 break;
-            case 'maxQuantity':
-                errors.maxQuantity =
-                    (value < 40 || value > 150 || value < this.state.minQuantity)
+            case 'cantMax':
+                errors.cantMax =
+                    (value < 40 || value > 150 || value < this.state.cantMin)
                         ? 'Error cant max'
                         : '';
                 break;
-            case 'priceCantMax':
-                errors.priceCantMax =
-                    (value < 0 || value > 1000 || value > this.state.price || value > this.state.priceCantMin)
+            case 'priceMax':
+                errors.priceMax =
+                    (value < 0 || value > 1000 || value > this.state.price || value > this.state.priceMin)
                         ? 'Error price cant max'
                         : '';
                 break;
-            case 'deliveryValue':
-                errors.country =
+            case 'priceDelivery':
+                errors.priceDelivery =
                     (value < 10 || value >40)
                         ? 'Error delivery value'
                         : '';
@@ -122,10 +124,7 @@ class MenuForm extends Component{
                 break;
         }
         this.setState({errors, [name]: value}, ()=> {
-            console.log(errors);
-            console.log(
-                moment().format('MMMM Do YYYY, h:mm:ss a')
-            );
+            console.log(this.state);
         })
     };
 
@@ -139,8 +138,8 @@ class MenuForm extends Component{
         });
     };
 
-    /*createUser = () => {
-        fetch(host + "/api/clients", {
+    createMenu = () => {
+        fetch(host + "/api/menus", {
 
             method: "POST",
             headers: {
@@ -162,8 +161,9 @@ class MenuForm extends Component{
                     token: json
                 });
             })
-            .catch(error => console.error(error));    };
-*/
+            .catch(error => console.error(error));
+    };
+
     render(){
         return (
             <div>
@@ -209,8 +209,8 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="maxQuantityPerDay"
-                                name="maxQuantityPerDay"
+                                id="cantMaxPeerDay"
+                                name="cantMaxPeerDay"
                                 label={i18n.t('MaxQuantityPerDay.label')}
                                 fullWidth
                                 onChange={this.handleChange}
@@ -221,8 +221,8 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="minQuantity"
-                                name="minQuantity"
+                                id="cantMin"
+                                name="cantMin"
                                 label={i18n.t('MinQuantity.label')}
                                 fullWidth
                                 onChange={this.handleChange}
@@ -233,8 +233,8 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 required
-                                id="priceCantMin"
-                                name="priceCantMin"
+                                id="priceMin"
+                                name="priceMin"
                                 label={i18n.t("PriceCantMin.label")}
                                 fullWidth
                                 onChange={this.handleChange}
@@ -243,8 +243,8 @@ class MenuForm extends Component{
                             />
                         </Grid>                        <Grid item xs={12} sm={6}>
                             <TextField
-                                id="maxQuantity"
-                                name="maxQuantity"
+                                id="cantMax"
+                                name="cantMax"
                                 label={i18n.t("MaxQuantity.label")}
                                 fullWidth
                                 onChange={this.handleChange}
@@ -254,8 +254,8 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                id="priceCantMax"
-                                name="priceCantMax"
+                                id="priceMax"
+                                name="priceMax"
                                 label={i18n.t("PriceCantMax.label")}
                                 fullWidth
                                 onChange={this.handleChange}
@@ -280,6 +280,7 @@ class MenuForm extends Component{
                                 id="urlImage"
                                 name="urlImage"
                                 label={i18n.t("UrlImage.label")}
+                                onChange={this.handleChange}
                                 fullWidth
                                 noValidate
                             />
