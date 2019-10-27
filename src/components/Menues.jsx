@@ -50,9 +50,9 @@ export default function Menues( { menues } ) {
                     {/* End hero unit */}
                     <Grid container spacing={4}>
                         {
-                            menues.map((menu, index, array) => (
-                            <Grid item key={menu} xs={12} sm={6} md={4}>
-                                <MenuCard menu={menues[index]}/>
+                            menues.map((aMenu, index) => (
+                            <Grid item key={aMenu} xs={12} sm={6} md={4}>
+                                <MenuCard menu={aMenu}/>
                             </Grid>
                         ))
                         }
