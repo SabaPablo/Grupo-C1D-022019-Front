@@ -1,15 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../dist/css/App.css';
 import Menues from "./Menues";
-import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core";
 import {fade} from "@material-ui/core/styles";
-import SearchIcon from '@material-ui/icons/Search';
-
 import axios from 'axios';
+import Fab from "@material-ui/core/Fab";
+import AddIcon from '@material-ui/icons/Add';
 
 
-const Home = () => {
+const Sell = (props) => {
     const useStyles = makeStyles(theme => ({
 
         hide: {
@@ -55,58 +54,42 @@ const Home = () => {
 
     const classes =useStyles();
 
-    const [menus, setMenues] = useState([]);
-    const [query, setQuery] = useState('');
+    const [menues, setMenues] = useState([]);
 
     useEffect(() => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + 'api/menus')
+        console.log(sessionStorage.getItem('user_id'))
+        axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/provider?providerId=${sessionStorage.getItem('user_id')}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
-
     }, []);
 
 
-    const handleOnChange = (e) => {
-        setQuery(e.target.value)
+    const goToMenuForm = () => {
+        props.history.push("/menu/add")
     };
 
-    const searchWithQuery = () => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
-            .then(res => {
-                const menues = res.data;
-                setMenues(menues) })
-
-    };
-
-    const handleKeyPress = (e) => {
-        if (e.which === 13 || e.keyCode === 13)
-            searchWithQuery()
-    };
 
         return (
             <div>
+
+            <div>
                 <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon />
+
+                    <div align="right">
+                        <Fab color="primary" aria-label="add" className={classes.fab}
+                            onClick={goToMenuForm}>
+                            <AddIcon />
+                        </Fab>
                     </div>
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'search' }}
-                        value={query}
-                        onChange={handleOnChange}
-                        onKeyPress={handleKeyPress}
-                    />
                 </div>
-                <Menues menues={menus}/>
+                <Menues menues={menues}/>
+
+            </div>
 
             </div>
         );
 
 };
 
-export default Home;
+export default Sell;

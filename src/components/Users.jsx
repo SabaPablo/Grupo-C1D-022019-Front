@@ -15,10 +15,106 @@ class Users extends Component{
 
     constructor(props) {
         super(props);
-        this.state ={
-                name: '1'
+        this.state = {
+            name: null,
+            lastName: null,
+            mail: null,
+            phone: null,
+            address: null,
+            city: null,
+            state: null,
+            zip: null,
+            country: null,
+            password: null,
+            errors: {
+                name: '',
+                lastName: '',
+                mail: '',
+                phone: '',
+                address: '',
+                city: '',
+                state: '',
+                zip: '',
+                country: '',
+                password: '',
+            }
         };
     }
+
+    handleChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+
+        switch (name) {
+            case 'name':
+                errors.name =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long name'
+                        : '';
+                break;
+            case 'lastName':
+                errors.lastName =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long lastName'
+                        : '';
+                break;
+            case 'password':
+                errors.password ='';
+                if (!(value.match(/^(?=.*[a-zA-Z])(?=.*[0-9]).+$/) && value.length>=8) ){
+                    errors.password="Please enter a valid password";
+                }
+
+                break;
+            case 'mail':
+                errors.mail ='';
+                if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ){
+                    errors.mail="Please enter a valid email address";
+                }
+                //validEmailRegex.test(value)
+                        //? ''
+                        //: 'Email is not valid!';
+                break;
+            case 'address':
+                errors.address =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long address'
+                        : '';
+                break;
+            case 'city':
+                errors.city =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long city'
+                        : '';
+                break;
+            case 'zip':
+                errors.zip =
+                    (value.length < 4 || value.length >8)
+                        ? 'Error long zip'
+                        : '';
+                break;
+            case 'state':
+                errors.state =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long state'
+                        : '';
+                break;
+            case 'country':
+                errors.country =
+                    (value.length < 4 || value.length >30)
+                        ? 'Error long country'
+                        : '';
+                break;
+            default:
+                break;
+        }
+
+        this.setState({errors, [name]: value}, ()=> {
+            console.log(errors)
+        })
+    };
+
+
 
     changeProperty = (e) => {
         let value = e.target.value;
@@ -69,7 +165,8 @@ class Users extends Component{
                                 label={i18n.t("FirstName.label")}
                                 fullWidth
                                 autoComplete="fname"
-                                onChange={this.changeProperty}
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -80,6 +177,8 @@ class Users extends Component{
                                 label={i18n.t("LastName.label")}
                                 fullWidth
                                 autoComplete="lname"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -90,7 +189,34 @@ class Users extends Component{
                                 label={i18n.t('Mail.label')}
                                 fullWidth
                                 autoComplete="email"
-                                onChange={this.changeProperty}
+                                onChange={this.handleChange}
+                                noValidate
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="password"
+                                name="password"
+                                label={i18n.t('Password.label')}
+                                fullWidth
+                                autoComplete="password"
+                                onChange={this.handleChange}
+                                noValidate
+                                type={"password"}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="phone"
+                                name="phone"
+                                label={i18n.t('Phone.label')}
+                                fullWidth
+                                autoComplete="phone"
+                                onChange={this.handleChange}
+                                noValidate
+                                type={"number"}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -100,6 +226,8 @@ class Users extends Component{
                                 label={i18n.t("Address.label")}
                                 fullWidth
                                 autoComplete="billing address-line2"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -110,10 +238,20 @@ class Users extends Component{
                                 label={i18n.t("City.label")}
                                 fullWidth
                                 autoComplete="billing address-level2"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField required id="state" name="state" label={i18n.t("State.label")} fullWidth />
+                            <TextField
+                                required
+                                id="state"
+                                name="state"
+                                label={i18n.t("State.label")}
+                                fullWidth
+                                onChange={this.handleChange}
+                                noValidate
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
@@ -123,6 +261,8 @@ class Users extends Component{
                                 label={i18n.t("ZipCode.label")}
                                 fullWidth
                                 autoComplete="billing postal-code"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -133,6 +273,8 @@ class Users extends Component{
                                 label={i18n.t("Country.label")}
                                 fullWidth
                                 autoComplete="billing country"
+                                onChange={this.handleChange}
+                                noValidate
                             />
                         </Grid>
                         <Grid item xs={12}>

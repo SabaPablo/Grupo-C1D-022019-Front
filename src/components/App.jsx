@@ -1,7 +1,5 @@
 import React from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
-import Home from './Home';
-import Contact from "./Contacts";
 import NavBar from "./navBar"
 import Users from "./Users";
 import SignIn from "./Login";
@@ -18,20 +16,15 @@ class App extends React.Component {
     }
     render() {
         return (
-                <Router history={history}>
-                    <Switch>
-                        <Route exact path="/login" component={SignIn}/>
-                        <Route exact path="/register" component={Users} />
-                        <Route path="/">
-                        <PrivateRoute path="/" component={NavBar} />
-                            <Switch>
-                                <PrivateRoute exact path="/Home" component={Home} />
-                                <PrivateRoute exact path="/contacts" component={Contact} />
-                                <PrivateRoute exact path="/users" component={Users} />
-                            </Switch>
-                        </Route>
-                    </Switch>
-                </Router>
+            <Router history={history}>
+                <Switch>
+                    <Route exact path="/login" component={SignIn}/>
+                    <Route exact path="/register" component={Users} />
+                    <Route path="/">
+                    <PrivateRoute path="/" component={NavBar} />
+                    </Route>
+                </Switch>
+            </Router>
         );
     }
 
