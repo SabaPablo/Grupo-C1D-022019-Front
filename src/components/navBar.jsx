@@ -262,7 +262,9 @@ export default function MiniDrawer(props) {
                         </ListItem>
                     ))}
                 </List>
+
             </Drawer>
+
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Route>
@@ -276,6 +278,7 @@ export default function MiniDrawer(props) {
                     </Switch>
                 </Route>
             </main>
+
         </div>
     );
 }

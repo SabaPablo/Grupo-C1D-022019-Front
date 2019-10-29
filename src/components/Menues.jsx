@@ -2,10 +2,9 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuCard from "./MenuCard";
-import AddCard from "./AddCard";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -40,15 +39,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Menues( { menues } ) {
 
-    const ExpansionCard = (props) => {
-        const menu = props.menu;
-        if (menu.isAdd) {
-            return <AddCard/>;
-        }
-        return <MenuCard menu={menu}/>
-
-    }
-
     const classes = useStyles();
 
     return (
@@ -60,9 +50,9 @@ export default function Menues( { menues } ) {
                     {/* End hero unit */}
                     <Grid container spacing={4}>
                         {
-                            menues.map((menu, index, array) => (
-                            <Grid item key={menu} xs={12} sm={6} md={4}>
-                                <ExpansionCard menu={menues[index]}/>
+                            menues.map((aMenu, index) => (
+                            <Grid item key={aMenu} xs={12} sm={6} md={4}>
+                                <MenuCard menu={aMenu}/>
                             </Grid>
                         ))
                         }

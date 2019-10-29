@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../dist/css/App.css';
 import Menues from "./Menues";
-import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core";
 import {fade} from "@material-ui/core/styles";
+import SearchIcon from '@material-ui/icons/Search';
+
 import axios from 'axios';
 
 
@@ -54,8 +55,7 @@ const Home = () => {
 
     const classes =useStyles();
 
-        // TODO FIXME CAMBIAR A AXIOS .....
-    const [menues, setMenues] = useState([]);
+    const [menus, setMenues] = useState([]);
     const [query, setQuery] = useState('');
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Home = () => {
         setQuery(e.target.value)
     };
 
-    const searchWithQuerry = () => {
+    const searchWithQuery = () => {
         axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
             .then(res => {
                 const menues = res.data;
@@ -81,7 +81,7 @@ const Home = () => {
 
     const handleKeyPress = (e) => {
         if (e.which === 13 || e.keyCode === 13)
-            searchWithQuerry()
+            searchWithQuery()
     };
 
         return (
@@ -102,7 +102,8 @@ const Home = () => {
                         onKeyPress={handleKeyPress}
                     />
                 </div>
-                <Menues menues={menues}/>
+                <Menues menues={menus}/>
+
             </div>
         );
 

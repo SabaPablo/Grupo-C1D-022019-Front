@@ -13,9 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import i18n from "../i18n";
-
-
-
+import axios from "axios";
 
 class SignIn extends Component{
 
@@ -56,29 +54,26 @@ class SignIn extends Component{
     };
 
     goToHome= () =>{
-        console.log(this.state.mail)
-        fetch((process.env.API_URL || 'http://localhost:8080/') + 'api/login', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                mail: this.state.mail,
-                password: this.state.password
-            })
-        }).then(res => res.json())
-            .then((data) => {
-                if(data.userId > 0 && data.userId !== undefined){
-                console.log(data)
+
+        axios.post((process.env.API_URL || 'http://localhost:8080') + '/api/login',{
+            mail: this.state.mail,
+            password: this.state.password
+        })
+            .then(data => {
+                if(data.data.userId > 0 && data.data.userId !== undefined){
                     sessionStorage.setItem('login', 'ok');
-                    sessionStorage.setItem('user_id', data.userId);
+                    sessionStorage.setItem('user_id', data.data.userId);
                     this.props.history.push(`/home`);
+                } else {
+                    this.dialogError()
                 }
-            })
-            .catch(console.log)
+            }).catch(console.log);
         this.clearState();
     };
+
+    dialogError() {
+
+    }
 
     clearState(){
         this.setState({mail: null, password:null})
@@ -160,5 +155,6 @@ class SignIn extends Component{
         );
     }
 }
+
 
 export default SignIn;
