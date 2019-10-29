@@ -67,7 +67,7 @@ class SignIn extends Component{
                 mail: this.state.mail,
                 password: this.state.password
             })
-        }) .then(res => res.json())
+        }).then(res => res.json())
             .then((data) => {
                 if(data.userId > 0 && data.userId !== undefined){
                 console.log(data)
