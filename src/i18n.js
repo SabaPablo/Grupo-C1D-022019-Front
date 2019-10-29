@@ -21,8 +21,8 @@ i18next
                     Error:{
                         Name:{label: 'the name must be between 4 and 30 characters.'}
                     },
-                    FchSince: { label: 'Since' },
-                    FchUntil: { label: 'Until' },
+                    dateInit: { label: 'Since' },
+                    dateEnd: { label: 'Until' },
                     FirstName: { label: 'First Name' },
                     ForgotPassword: { label: 'Forgot password?' },
                     LastName: { label: 'Last Name' },
@@ -60,8 +60,8 @@ i18next
                     Error:{
                         Name:{label: 'El nombre debe tener entr 4 y 30 letras.'}
                     },
-                    FchSince: { label: 'Desde' },
-                    FchUntil: { label: 'Hasta' },
+                    dateInit: { label: 'Desde' },
+                    dateEnd: { label: 'Hasta' },
                     FirstName: { label: 'Nombre' },
                     ForgotPassword: { label: 'Olvidé mi contraseña' },
                     LastName: { label: 'Apellido' },
