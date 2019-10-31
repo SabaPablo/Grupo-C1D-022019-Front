@@ -19,6 +19,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HomeIcon from '@material-ui/icons/Home';
 import Home from "./Home";
@@ -29,6 +30,8 @@ import Users from "./Users";
 import Sell from "./Sell";
 import Buy from "./Buy";
 import MenuForm from "./MenuForm";
+import Credits from "./Credits";
+import Lang from "./Lang";
 
 const drawerWidth = 240;
 
@@ -157,6 +160,10 @@ export default function MiniDrawer(props) {
         props.history.push(`/config`);
 
     };
+    const goToCredit = () => {
+        props.history.push(`/credit`);
+
+    };
     const goToBuy = () => {
         props.history.push(`/cart`);
     };
@@ -190,6 +197,7 @@ export default function MiniDrawer(props) {
                     <Typography className={classes.title} variant="h6" noWrap>
                         Viandas YA
                     </Typography>
+                    <Lang lang={props.lang}/>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -246,6 +254,14 @@ export default function MiniDrawer(props) {
                             </ListItemIcon>
                             <ListItemText primary={'Ventas'} />
                         </ListItem>,
+                        <ListItem button key={'Credito'}
+                                  onClick={goToCredit}
+                        >
+                            <ListItemIcon>
+                                <LocalAtmIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={'Credito'} />
+                        </ListItem>,
 
                         ]
                     }
@@ -272,6 +288,7 @@ export default function MiniDrawer(props) {
                         <PrivateRoute exact path="/Home" component={Home} />
                         <PrivateRoute exact path="/cart" component={Buy} />
                         <PrivateRoute exact path="/sell" component={Sell} />
+                        <PrivateRoute exact path="/credit" component={Credits} />
                         <PrivateRoute exact path="/menu/add" component={MenuForm} />
                         <PrivateRoute exact path="/contacts" component={Contact} />
                         <PrivateRoute exact path="/users" component={Users} />
