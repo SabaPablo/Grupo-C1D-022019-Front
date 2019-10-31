@@ -54,6 +54,7 @@ class SignIn extends Component{
     };
 
     goToHome= () =>{
+
         axios.post((process.env.API_URL || 'http://localhost:8080') + '/api/login',{
             mail: this.state.mail,
             password: this.state.password
