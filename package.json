@@ -5,12 +5,21 @@
   "dependencies": {
     "@material-ui/core": "^4.4.0",
     "@material-ui/icons": "^4.4.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "axios": "^0.19.0",
+    "i18next": "^17.2.0",
+    "i18next-browser-languagedetector": "^4.0.0",
+    "material-ui": "^0.20.2",
+    "mobx": "^5.14.0",
+    "moment": "^2.24.0",
+    "prop-types": "latest",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-i18next": "^10.13.1",
+    "react-md": "^1.12.3",
+    "react-router": "latest",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "react-router": "latest",
-    "prop-types": "latest"
+    "clsx": "latest"
   },
   "scripts": {
     "start": "react-scripts start .env",
