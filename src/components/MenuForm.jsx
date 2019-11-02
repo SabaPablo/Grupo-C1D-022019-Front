@@ -165,6 +165,10 @@ class MenuForm extends Component{
             .catch(error => console.error(error));
     };
 
+    setCategories = values => {
+        this.setState({categories: values})
+    };
+
     render(){
         return (
             <div>
@@ -184,9 +188,11 @@ class MenuForm extends Component{
                                 noValidate
                             />
                         </Grid>
+
                         <Grid item xs={12} sm={6}>
-                            <MultipleSelect />
+                            <MultipleSelect onChangeMulti={this.setCategories}/>
                         </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -304,6 +310,7 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <label> {i18n.t("dateEnd.label")} </label>
                             <TextField
+                                error
                                 required
                                 id="dateEnd"
                                 name="dateEnd"
@@ -328,5 +335,4 @@ class MenuForm extends Component{
     }
 
 }
-
 export default MenuForm;

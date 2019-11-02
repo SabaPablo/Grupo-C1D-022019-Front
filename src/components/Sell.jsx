@@ -6,6 +6,7 @@ import {fade} from "@material-ui/core/styles";
 import axios from 'axios';
 import Fab from "@material-ui/core/Fab";
 import AddIcon from '@material-ui/icons/Add';
+import Tooltip from "@material-ui/core/Tooltip";
 
 
 const Sell = (props) => {
@@ -77,10 +78,12 @@ const Sell = (props) => {
                 <div className={classes.search}>
 
                     <div align="right">
-                        <Fab color="primary" aria-label="add" className={classes.fab}
-                            onClick={goToMenuForm}>
-                            <AddIcon />
-                        </Fab>
+                        <Tooltip title="Add" aria-label="add">
+                            <Fab color="secondary" className={classes.absolute}
+                                onClick={goToMenuForm}>
+                                <AddIcon />
+                            </Fab>
+                        </Tooltip>
                     </div>
                 </div>
                 <Menues menues={menues}/>

@@ -14,16 +14,16 @@ import i18n from "../i18n";
 
 const suggestions = [
     { label: i18n.t("FastFood.label") },
-    { label: i18n.t("Pizza.label") },
-    { label: i18n.t("Grill.label") },
     { label: i18n.t("Fish.label") },
-
-    { label: i18n.t("Picadas.label") },
-    { label: i18n.t("Vegano.label") },
-    { label: i18n.t("Vegetariano.label") },
-    { label: i18n.t("Minuta.label") },
-    { label: i18n.t("Postres.label") },
-    { label: i18n.t("Pastas.label") },
+    { label: i18n.t("Grill.label") },
+    { label: i18n.t("Pizza.label") },
+    { label: i18n.t("Pasta.label") },
+    { label: i18n.t("Vegan.label") },
+    { label: i18n.t("Vegetarian.label") },
+    { label: i18n.t("Dessert.label") },
+    { label: i18n.t("Drink.label") },
+    { label: i18n.t("Beer.label") },
+    { label: i18n.t("Wine.label") },
 
 ].map(suggestion => ({
     value: suggestion.label,
@@ -336,6 +336,7 @@ export default function IntegrationReactSelect(props) {
     };
 
     const handleChangeMulti = value => {
+        props.onChangeMulti(value)
         setMulti(value);
     };
 
@@ -357,13 +358,13 @@ export default function IntegrationReactSelect(props) {
                     styles={selectStyles}
                     inputId="react-select-multiple"
                     TextFieldProps={{
-                        label: 'Countries',
+                        label: i18n.t('Categories.label'),
                         InputLabelProps: {
                             htmlFor: 'react-select-multiple',
                             shrink: true,
                         },
                     }}
-                    placeholder="Select multiple countries"
+                    placeholder= { i18n.t('CategoriesMultiSelect.label') }
                     options={suggestions}
                     components={components}
                     value={multi}
