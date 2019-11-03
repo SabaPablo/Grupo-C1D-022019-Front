@@ -1,2 +1,2 @@
 require('./index.jsx');
-require ('dotenv'). config ();
+require('dotenv').config();
