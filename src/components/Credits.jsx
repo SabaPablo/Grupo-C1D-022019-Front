@@ -38,7 +38,7 @@ const Credits = () => {
     const [userCredit, setuserCredit] = useState(0.0);
 
     useEffect(() => {
-        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + `api/credit?user_id=${sessionStorage.getItem('user_id')}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/credit?user_id=${sessionStorage.getItem('user_id')}`)
             .then(res => {
                 setuserCredit(res.data);
             })
@@ -46,7 +46,7 @@ const Credits = () => {
     }, []);
 
     const addMoney = () => {
-        axios.post((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + 'api/credit' ,{
+        axios.post((process.env.REACT_APP_API_URL || 'http://localhost:8080') + '/api/credit' ,{
             amount: amount,
             user_id: sessionStorage.getItem('user_id')
 

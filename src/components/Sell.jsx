@@ -59,7 +59,7 @@ const Sell = (props) => {
 
     useEffect(() => {
         console.log(sessionStorage.getItem('user_id'))
-        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + `api/menus/provider?providerId=${sessionStorage.getItem('user_id')}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/provider?providerId=${sessionStorage.getItem('user_id')}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })

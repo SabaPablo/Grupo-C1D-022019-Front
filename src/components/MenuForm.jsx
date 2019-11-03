@@ -9,8 +9,6 @@ import i18n from "../i18n"
 import moment from "moment";
 import MultipleSelect from "./MultipleSelect";
 
-const host= "http://localhost:8080";
-
 class MenuForm extends Component{
 
     constructor(props) {
@@ -140,7 +138,7 @@ class MenuForm extends Component{
     };
 
     createMenu = () => {
-        fetch(host + "/api/menus", {
+        fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080')  + "/api/menus", {
 
             method: "POST",
             headers: {
