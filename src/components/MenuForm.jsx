@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
 import moment from "moment";
+import MultipleSelect from "./MultipleSelect";
 
 const host= "http://localhost:8080";
 
@@ -18,7 +19,7 @@ class MenuForm extends Component{
             idProvider: sessionStorage.getItem('user_id'),
             name: null,
             description: null,
-            category: "alimento",
+            category:[],
             cantMaxPeerDay: null,
             cantMin: null,
             cantMax: null,
@@ -26,8 +27,8 @@ class MenuForm extends Component{
             priceMin: null,
             priceMax: null,
             priceDelivery: null,
-            fchSince: null,
-            fchUntil: null,
+            dateInit: null,
+            dateEnd: null,
             urlImage:null,
             errors: {
                 name: '',
@@ -39,8 +40,8 @@ class MenuForm extends Component{
                 priceMin: '',
                 priceMax: '',
                 priceDelivery: '',
-                fchSince: '',
-                fchUntil: '',
+                dateInit: '',
+                dateEnd: '',
                 urlImage:''
             }
         };
@@ -106,17 +107,17 @@ class MenuForm extends Component{
                         ? 'Error delivery value'
                         : '';
                 break;
-            case 'fchUntil':
-                errors.fchUntil =
+            case 'dateEnd':
+                errors.dateEnd =
                     (moment(value, "YYYY-MM-DD").diff(moment().format("YYYY-MM-DD"),'hours') < 0 ||
-                     moment(value, "YYYY-MM-DD").diff(moment(this.state.fchSince, "YYYY-MM-DD"),'hours') < 0)
+                     moment(value, "YYYY-MM-DD").diff(moment(this.state.dateInit, "YYYY-MM-DD"),'hours') < 0)
                         ? 'Error time Until'
                         :'';
                 break;
-            case 'fchSince':
-                errors.fchSince =
+            case 'dateInit':
+                errors.dateInit =
                     (moment(value, "YYYY-MM-DD").diff(moment().format("YYYY-MM-DD"),'hours') < 0 ||
-                     moment(value, "YYYY-MM-DD").diff(moment(this.state.fchUntil, "YYYY-MM-DD"),'hours') > 0)
+                     moment(value, "YYYY-MM-DD").diff(moment(this.state.dateEnd, "YYYY-MM-DD"),'hours') > 0)
                         ? 'Error time Since'
                         :'';
                 break;
@@ -164,6 +165,10 @@ class MenuForm extends Component{
             .catch(error => console.error(error));
     };
 
+    setCategories = values => {
+        this.setState({categories: values})
+    };
+
     render(){
         return (
             <div>
@@ -172,7 +177,7 @@ class MenuForm extends Component{
                         {i18n.t('MenuRegister.label')}
                     </Typography>
                     <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 required
                                 id="name"
@@ -183,6 +188,11 @@ class MenuForm extends Component{
                                 noValidate
                             />
                         </Grid>
+
+                        <Grid item xs={12} sm={6}>
+                            <MultipleSelect onChangeMulti={this.setCategories}/>
+                        </Grid>
+
                         <Grid item xs={12}>
                             <TextField
                                 required
@@ -286,11 +296,11 @@ class MenuForm extends Component{
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <label> {i18n.t("FchSince.label")} </label>
+                            <label> {i18n.t("dateInit.label")} </label>
                             <TextField
                                 required
-                                id="fchSince"
-                                name="fchSince"
+                                id="dateInit"
+                                name="dateInit"
                                 onChange={this.handleChange}
                                 fullWidth
                                 noValidate
@@ -298,11 +308,12 @@ class MenuForm extends Component{
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <label> {i18n.t("FchUntil.label")} </label>
+                            <label> {i18n.t("dateEnd.label")} </label>
                             <TextField
+                                error
                                 required
-                                id="fchUntil"
-                                name="fchUntil"
+                                id="dateEnd"
+                                name="dateEnd"
                                 onChange={this.handleChange}
                                 fullWidth
                                 noValidate
@@ -324,5 +335,4 @@ class MenuForm extends Component{
     }
 
 }
-
 export default MenuForm;
