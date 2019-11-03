@@ -24,6 +24,9 @@ class SignIn extends Component{
             password: null
         }
     }
+
+
+
     useStyles = makeStyles(theme => ({
         '@global': {
             body: {
@@ -55,7 +58,7 @@ class SignIn extends Component{
 
     goToHome= () =>{
 
-        axios.post((process.env.API_URL || 'http://localhost:8080') + '/api/login',{
+        axios.post((process.env.REACT_APP_API_URL || 'http://localhost:8080') + '/api/login',{
             mail: this.state.mail,
             password: this.state.password
         })

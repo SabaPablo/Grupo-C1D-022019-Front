@@ -59,7 +59,7 @@ const Buy = () => {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + 'api/menus')
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + 'api/menus')
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
@@ -72,7 +72,7 @@ const Buy = () => {
     };
 
     const searchWithQuerry = () => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
