@@ -9,8 +9,6 @@ import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
 
-const host= "http://localhost:8080";
-
 class Users extends Component{
 
     constructor(props) {
@@ -71,9 +69,6 @@ class Users extends Component{
                 if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ){
                     errors.mail="Please enter a valid email address";
                 }
-                //validEmailRegex.test(value)
-                        //? ''
-                        //: 'Email is not valid!';
                 break;
             case 'address':
                 errors.address =
@@ -114,18 +109,8 @@ class Users extends Component{
         })
     };
 
-
-
-    changeProperty = (e) => {
-        let value = e.target.value;
-        let property = e.target.name;
-        this.setState({
-            [property]: value
-        });
-    };
-
     createUser = () => {
-        fetch(host + "/api/clients", {
+        fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080') + "/api/clients", {
 
             method: "POST",
             headers: {
