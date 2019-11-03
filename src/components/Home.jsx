@@ -5,11 +5,14 @@ import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core";
 import {fade} from "@material-ui/core/styles";
 import SearchIcon from '@material-ui/icons/Search';
+import dotenv from 'dotenv'
 
 import axios from 'axios';
 
 
 const Home = () => {
+
+
     const useStyles = makeStyles(theme => ({
 
         hide: {
@@ -59,7 +62,7 @@ const Home = () => {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + 'api/menus')
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + 'api/menus')
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
@@ -72,7 +75,7 @@ const Home = () => {
     };
 
     const searchWithQuery = () => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
