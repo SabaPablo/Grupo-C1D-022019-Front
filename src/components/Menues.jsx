@@ -33,11 +33,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-//const menues = [{name: "pure", description: "pure de papas con algo de pimienta", urlImage: ""},{name: "milas", description: "como las que hace la abuela", urlImage: "https://www.mexicoenmicocina.com/wp-content/uploads/2019/01/receta-de-milanesa-de-pollo.jpg"}, {name: "tomate"}, {name: "algo"}, {name: "mierda"}, {name: "comida"}];
-
-
-
-export default function Menues( { menues } ) {
+const Menues = ( { menues }) => {
 
     const classes = useStyles();
 
@@ -68,4 +64,6 @@ export default function Menues( { menues } ) {
             {/* End footer */}
         </React.Fragment>
     );
-}
+};
+
+export default Menues;

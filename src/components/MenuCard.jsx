@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
+import history from "./History";
 import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
@@ -40,9 +41,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function MenuCard({ menu }) {
+function MenuCard({ menu }) {
 
     const classes = useStyles();
+
+    const buyMenu = () => {
+        history.push(`/order/${menu.id}`);
+    };
 
     return (
 
@@ -63,12 +68,17 @@ export default function MenuCard({ menu }) {
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary">
-                    View
+                    Ver
                 </Button>
-                <Button size="small" color="primary">
-                    Edit
+                <Button
+                    size="small"
+                    color="primary"
+                    onClick={buyMenu}>
+                    Comprar
                 </Button>
             </CardActions>
         </Card>
     )
 }
+
+export default MenuCard;
