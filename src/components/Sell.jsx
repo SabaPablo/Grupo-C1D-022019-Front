@@ -49,7 +49,11 @@ const Sell = (props) => {
             [theme.breakpoints.up('md')]: {
                 width: 200,
             },
+        },
+        iconPlus: {
+            position:'fixed'
         }
+
     }));
 
 
@@ -58,8 +62,7 @@ const Sell = (props) => {
     const [menues, setMenues] = useState([]);
 
     useEffect(() => {
-        console.log(sessionStorage.getItem('user_id'))
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/provider?providerId=${sessionStorage.getItem('user_id')}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/provider?providerId=${sessionStorage.getItem('user_id')}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
@@ -71,15 +74,13 @@ const Sell = (props) => {
     };
 
 
-        return (
-            <div>
-
+    return (
+        <div>
             <div>
                 <div className={classes.search}>
-
                     <div align="right">
                         <Tooltip title="Add" aria-label="add">
-                            <Fab color="secondary" className={classes.absolute}
+                            <Fab color="secondary" className={classes.iconPlus}
                                 onClick={goToMenuForm}>
                                 <AddIcon />
                             </Fab>
@@ -87,11 +88,9 @@ const Sell = (props) => {
                     </div>
                 </div>
                 <Menues menues={menues}/>
-
             </div>
-
-            </div>
-        );
+        </div>
+    );
 
 };
 

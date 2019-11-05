@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../dist/css/App.css';
-import Menues from "./Menues";
 import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core";
 import {fade} from "@material-ui/core/styles";
 import axios from 'axios';
+import Orders from "./Orders";
 
 
 const Buy = () => {
@@ -59,7 +59,7 @@ const Buy = () => {
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + 'api/menus')
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + '/api/menus')
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
@@ -72,7 +72,7 @@ const Buy = () => {
     };
 
     const searchWithQuerry = () => {
-        axios.get((process.env.API_URL || 'http://localhost:8080/') + `api/menus/query?query=${query}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/query?query=${query}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
@@ -102,7 +102,7 @@ const Buy = () => {
                         onKeyPress={handleKeyPress}
                     />
                 </div>
-                <Menues menues={menues}/>
+                <Orders orders={menues}/>
             </div>
         );
 

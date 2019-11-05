@@ -328,12 +328,8 @@ const components = {
 export default function IntegrationReactSelect(props) {
     const classes = useStyles();
     const theme = useTheme();
-    const [single, setSingle] = React.useState(null);
     const [multi, setMulti] = React.useState(null);
 
-    const handleChangeSingle = value => {
-        setSingle(value);
-    };
 
     const handleChangeMulti = value => {
         props.onChangeMulti(value)
