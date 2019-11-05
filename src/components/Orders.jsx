@@ -48,7 +48,7 @@ const Orders = ({ orders }) => {
                         {
                             orders.map((aMenu, index) => (
                             <Grid item key={aMenu} xs={12} sm={6} md={6}>
-                                <OrderCard menu={aMenu}/>
+                                <OrderCard order={aMenu}/>
                             </Grid>
                         ))
                         }
