@@ -310,7 +310,6 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <label> {i18n.t("dateEnd.label")} </label>
                             <TextField
-                                error
                                 required
                                 id="dateEnd"
                                 name="dateEnd"
