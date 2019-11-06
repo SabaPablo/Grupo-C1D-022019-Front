@@ -54,15 +54,14 @@ const Buy = () => {
 
     const classes =useStyles();
 
-        // TODO FIXME CAMBIAR A AXIOS .....
-    const [menues, setMenues] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [query, setQuery] = useState('');
 
     useEffect(() => {
-        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + '/api/menus')
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/orders?userId=${sessionStorage.getItem('user_id')}`)
             .then(res => {
-                const menues = res.data;
-                setMenues(menues) })
+                const orders = res.data;
+                setOrders(orders) })
 
     }, []);
 
@@ -72,10 +71,10 @@ const Buy = () => {
     };
 
     const searchWithQuerry = () => {
-        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/query?query=${query}`)
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/orders/query?query=${query}`)
             .then(res => {
                 const menues = res.data;
-                setMenues(menues) })
+                setOrders(menues) })
 
     };
 
@@ -102,7 +101,7 @@ const Buy = () => {
                         onKeyPress={handleKeyPress}
                     />
                 </div>
-                <Orders orders={menues}/>
+                <Orders orders={orders}/>
             </div>
         );
 

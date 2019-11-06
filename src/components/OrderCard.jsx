@@ -42,22 +42,24 @@ export default function OrderCard({order}) {
                         <Grid item xs container direction="column" spacing={2}>
                             <Grid item xs>
                                 <Typography gutterBottom variant="subtitle1">
-                                    {order.name}
+                                    {order.menuName}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    Cantidad: {order.cantMin}
+                                    Cantidad: {order.cant}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary">
                                     Fecha: {order.date}
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <Typography variant="body2" style={{ cursor: 'pointer', color:'green' }}>
+                                <Typography variant="body2" style={{ cursor: 'pointer'}}>
+                                    Proveedor: {order.nameProvider}
+                                </Typography><Typography variant="body2" style={{ cursor: 'pointer', color:'green' }}>
                                     Entregado
                                 </Typography>
                             </Grid>
                         </Grid>
-                            <Typography variant="subtitle1">{order.price}</Typography>
+                            <Typography variant="subtitle1">{order.menuPrice}</Typography>
                         <Grid item>
                         </Grid>
                     </Grid>
