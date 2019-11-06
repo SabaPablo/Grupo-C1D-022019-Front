@@ -19,7 +19,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Rating from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles(theme => ({
     root: {
