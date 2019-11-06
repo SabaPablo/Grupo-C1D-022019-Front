@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import MenuCard from "./MenuCard";
+import OrderCard from "./OrderCard";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Menues = ( { menues }) => {
+const Orders = ({ orders }) => {
 
     const classes = useStyles();
 
@@ -46,9 +46,9 @@ const Menues = ( { menues }) => {
                     {/* End hero unit */}
                     <Grid container spacing={4}>
                         {
-                            menues.map((aMenu, index) => (
-                            <Grid item key={aMenu} xs={12} sm={6} md={4}>
-                                <MenuCard menu={aMenu}/>
+                            orders.map((aMenu, index) => (
+                            <Grid item key={aMenu} xs={12} sm={6} md={6}>
+                                <OrderCard order={aMenu}/>
                             </Grid>
                         ))
                         }
@@ -66,4 +66,4 @@ const Menues = ( { menues }) => {
     );
 };
 
-export default Menues;
+export default Orders;
