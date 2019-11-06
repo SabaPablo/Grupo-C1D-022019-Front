@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
                  setMenu(res.data);
                   })
 
-     }, []);
+     }, [params.match.params.number]);
      const menuInit = {
 
          "name": "Milanesas",
