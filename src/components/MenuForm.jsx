@@ -10,54 +10,56 @@ import moment from "moment";
 import MultipleSelect from "./MultipleSelect";
 
 class MenuForm extends Component{
-
+    state = {
+        idProvider: null,
+        name: null,
+        description: null,
+        category:[],
+        cantMaxPeerDay: null,
+        cantMin: null,
+        cantMax: null,
+        price: null,
+        priceMin: null,
+        priceMax: null,
+        priceDelivery: null,
+        dateInit: null,
+        dateEnd: null,
+        urlImage:null,
+        errors: {
+            name: '',
+            description: '',
+            cantMaxPeerDay: '',
+            cantMin: '',
+            cantMax: '',
+            price: '',
+            priceMin: '',
+            priceMax: '',
+            priceDelivery: '',
+            dateInit: '',
+            dateEnd: '',
+            urlImage:''
+        }
+    }
     constructor(props) {
         super(props);
-        this.state = {
-            idProvider: sessionStorage.getItem('user_id'),
-            name: null,
-            description: null,
-            category:[],
-            cantMaxPeerDay: null,
-            cantMin: null,
-            cantMax: null,
-            price: null,
-            priceMin: null,
-            priceMax: null,
-            priceDelivery: null,
-            dateInit: null,
-            dateEnd: null,
-            urlImage:null,
-            errors: {
-                name: '',
-                description: '',
-                cantMaxPeerDay: '',
-                cantMin: '',
-                cantMax: '',
-                price: '',
-                priceMin: '',
-                priceMax: '',
-                priceDelivery: '',
-                dateInit: '',
-                dateEnd: '',
-                urlImage:''
-            }
-        };
+        this.setState({"idProvider": sessionStorage.getItem('user_id')})
     }
 
     handleChange = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
         let errors = this.state.errors;
-
         switch (name) {
             case 'name':
+                console.log(event.target);
                 errors.name =
                     (value.length < 4 || value.length >30)
                         ? 'Error long name'
                         : '';
                 break;
             case 'description':
+                console.log(event.target);
+                event.target.error = 'error';
                 errors.description =
                     (value.length < 20 || value.length >40)
                         ? 'Error long description'
@@ -177,6 +179,7 @@ class MenuForm extends Component{
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.name != ''}
                                 required
                                 id="name"
                                 name="name"
@@ -193,6 +196,7 @@ class MenuForm extends Component{
 
                         <Grid item xs={12}>
                             <TextField
+                                error = {this.state.errors.description != ''}
                                 required
                                 id="description"
                                 name="description"
@@ -204,6 +208,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.price != ''}
                                 required
                                 id="price"
                                 name="price"
@@ -216,6 +221,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.cantMaxPeerDay != ''}
                                 required
                                 id="cantMaxPeerDay"
                                 name="cantMaxPeerDay"
@@ -228,6 +234,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.cantMin != ''}
                                 required
                                 id="cantMin"
                                 name="cantMin"
@@ -240,6 +247,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.priceMin != ''}
                                 required
                                 id="priceMin"
                                 name="priceMin"
@@ -251,6 +259,7 @@ class MenuForm extends Component{
                             />
                         </Grid>                        <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.cantMax != ''}
                                 id="cantMax"
                                 name="cantMax"
                                 label={i18n.t("MaxQuantity.label")}
@@ -262,6 +271,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.priceMax != ''}
                                 id="priceMax"
                                 name="priceMax"
                                 label={i18n.t("PriceCantMax.label")}
@@ -273,6 +283,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
+                                error = {this.state.errors.priceDelivery != ''}
                                 id="deliveryValue"
                                 name="deliveryValue"
                                 label={i18n.t("DeliveryValue.label")}
@@ -296,6 +307,7 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <label> {i18n.t("dateInit.label")} </label>
                             <TextField
+                                error = {this.state.errors.dateInit != ''}
                                 required
                                 id="dateInit"
                                 name="dateInit"
@@ -308,6 +320,7 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <label> {i18n.t("dateEnd.label")} </label>
                             <TextField
+                                error = {this.state.errors.dateEnd != ''}
                                 required
                                 id="dateEnd"
                                 name="dateEnd"
