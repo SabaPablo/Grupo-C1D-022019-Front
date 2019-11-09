@@ -43,6 +43,13 @@ class MenuForm extends Component{
         }
     };
 
+    cleanForm(){
+        var errors = this.state.errors;
+        var values = this.state;
+        for (const k in values) this.setState(values[k] = null);
+        for (const k in errors) this.setState();
+    };
+
     thereAreErrors = () => {
         return this.formHaveErrors() || this.formHaveNull();
     };
@@ -71,7 +78,6 @@ class MenuForm extends Component{
 
     componentDidMount(){
         this.setState({"idProvider": sessionStorage.getItem('user_id')})
-        console.log(this.state.idProvider,'provider');
     };
 
     handleChange = (event) => {
@@ -168,7 +174,7 @@ class MenuForm extends Component{
 
     createMenu = () => {
         if (this.thereAreErrors()) {
-            NotificationManager.error('No se lleno bien el formulario', 'Revise los datos ingresados', 3000, () => {
+            NotificationManager.error(i18n.t('MenuErrorCreation.label'), i18n.t('MenuErrorCreationDate.label'), 3000, () => {
                 alert('callback');
             });
         } else {
@@ -184,9 +190,10 @@ class MenuForm extends Component{
                 .then(res => {
                         console.log(res.ok);
                     if (res.ok) {
-                        NotificationManager.success('El menu fue creado correctamente');
+                        NotificationManager.success( i18n.t('MenuSuccessCreate.label'));
+                        const data = res.json();
                         this.cleanForm();
-                        return res.json();
+                        return data;
                     } else {
                         //TODO: PONER i18N
                         NotificationManager.error('Error de conexion', 'Click me!', 5000, () => {
@@ -203,10 +210,6 @@ class MenuForm extends Component{
                 })
                 .catch(error => console.error(error));
         }
-    };
-
-    cleanForm(){
-        
     };
 
     setCategories = values => {
