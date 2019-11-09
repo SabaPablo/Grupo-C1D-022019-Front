@@ -89,25 +89,25 @@ class MenuForm extends Component{
                 break;
             case 'cantMin':
                 errors.cantMin =
-                    (value < 10 || value > 70 || value >= this.state.cantMaxPeerDay)
+                    (value < 10 || value > 70 || +value >= +this.state.cantMaxPeerDay)
                         ? 'Error cant mim'
                         : '';
                 break;
             case 'priceMin':
                 errors.priceMin =
-                    (value < 0 || value > 1000 || value > this.state.price )
+                    (value < 0 || +value > 1000 || value >= this.state.price )
                         ? 'Error price cant min'
                         : '';
                 break;
             case 'cantMax':
                 errors.cantMax =
-                    (value < 40 || value > 150 || value < this.state.cantMin)
+                    (value < 40 || value > 150 || value <= this.state.cantMin || value >= this.state.cantMaxPeerDay)
                         ? 'Error cant max'
                         : '';
                 break;
             case 'priceMax':
                 errors.priceMax =
-                    (value < 0 || value > 1000 || value > this.state.priceMin)
+                    (value < 0 || value > 1000 || value >= this.state.priceMin)
                         ? 'Error price cant max'
                         : '';
                 break;
@@ -134,9 +134,9 @@ class MenuForm extends Component{
             default:
                 break;
         }
-        this.setState({errors, [name]: value});/*, ()=> {
+        this.setState({errors, [name]: value}, ()=> {
             console.log(this.state);
-        })*/
+        })
     };
 
 
@@ -304,8 +304,8 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 error = {this.state.errors.priceDelivery !== ''}
-                                id="deliveryValue"
-                                name="deliveryValue"
+                                id="priceDelivery"
+                                name="priceDelivery"
                                 label={i18n.t("DeliveryValue.label")}
                                 fullWidth
                                 onChange={this.handleChange}
