@@ -8,6 +8,8 @@ import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
 import moment from "moment";
 import MultipleSelect from "./MultipleSelect";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 class MenuForm extends Component{
     state = {
@@ -39,7 +41,17 @@ class MenuForm extends Component{
             dateEnd: '',
             urlImage:''
         }
-    }
+    };
+
+    thereAreErrors = () => {
+        var ret = false;
+        const ls = this.state.errors;
+
+        for ( const k in ls ) ret = ret || ls[k] !== '' ;
+
+        return ret;
+    };
+
     constructor(props) {
         super(props);
         this.setState({"idProvider": sessionStorage.getItem('user_id')})
@@ -51,14 +63,12 @@ class MenuForm extends Component{
         let errors = this.state.errors;
         switch (name) {
             case 'name':
-                console.log(event.target);
                 errors.name =
                     (value.length < 4 || value.length >30)
                         ? 'Error long name'
                         : '';
                 break;
             case 'description':
-                console.log(event.target);
                 event.target.error = 'error';
                 errors.description =
                     (value.length < 20 || value.length >40)
@@ -79,13 +89,13 @@ class MenuForm extends Component{
                 break;
             case 'cantMin':
                 errors.cantMin =
-                    (value < 10 || value > 70 || value < this.state.cantMax)
+                    (value < 10 || value > 70 || value >= this.state.cantMaxPeerDay)
                         ? 'Error cant mim'
                         : '';
                 break;
             case 'priceMin':
                 errors.priceMin =
-                    (value < 0 || value > 1000 || value > this.state.price || value < this.state.priceMax)
+                    (value < 0 || value > 1000 || value > this.state.price )
                         ? 'Error price cant min'
                         : '';
                 break;
@@ -97,7 +107,7 @@ class MenuForm extends Component{
                 break;
             case 'priceMax':
                 errors.priceMax =
-                    (value < 0 || value > 1000 || value > this.state.price || value > this.state.priceMin)
+                    (value < 0 || value > 1000 || value > this.state.priceMin)
                         ? 'Error price cant max'
                         : '';
                 break;
@@ -124,9 +134,9 @@ class MenuForm extends Component{
             default:
                 break;
         }
-        this.setState({errors, [name]: value}, ()=> {
+        this.setState({errors, [name]: value});/*, ()=> {
             console.log(this.state);
-        })
+        })*/
     };
 
 
@@ -140,29 +150,39 @@ class MenuForm extends Component{
     };
 
     createMenu = () => {
-        fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080')  + "/api/menus", {
+        if (!this.thereAreErrors()) {
+            NotificationManager.error('No se lleno bien el formulario', 'Revise los datos ingresados', 3000, () => {
+                alert('callback');
+            });
+        } else {
+            fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080') + "/api/menus", {
 
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify( this.state )
-        })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw Error(res.statusText);
-                }
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(this.state)
             })
-            .then(json => {
-                this.setState({
-                    isLoaded: true,
-                    token: json
-                });
-            })
-            .catch(error => console.error(error));
+                .then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        //TODO: PONER i18N
+                        NotificationManager.error('Error de conexion', 'Click me!', 5000, () => {
+                            alert('callback');
+                        });
+                        throw Error(res.statusText);
+                    }
+                })
+                .then(json => {
+                    this.setState({
+                        isLoaded: true,
+                        token: json
+                    });
+                })
+                .catch(error => console.error(error));
+        }
     };
 
     setCategories = values => {
@@ -179,7 +199,7 @@ class MenuForm extends Component{
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.name != ''}
+                                error = {this.state.errors.name !== ''}
                                 required
                                 id="name"
                                 name="name"
@@ -196,7 +216,7 @@ class MenuForm extends Component{
 
                         <Grid item xs={12}>
                             <TextField
-                                error = {this.state.errors.description != ''}
+                                error = {this.state.errors.description !== ''}
                                 required
                                 id="description"
                                 name="description"
@@ -208,7 +228,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.price != ''}
+                                error = {this.state.errors.price !== ''}
                                 required
                                 id="price"
                                 name="price"
@@ -221,7 +241,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.cantMaxPeerDay != ''}
+                                error = {this.state.errors.cantMaxPeerDay !== ''}
                                 required
                                 id="cantMaxPeerDay"
                                 name="cantMaxPeerDay"
@@ -234,7 +254,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.cantMin != ''}
+                                error = {this.state.errors.cantMin !== ''}
                                 required
                                 id="cantMin"
                                 name="cantMin"
@@ -247,7 +267,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.priceMin != ''}
+                                error = {this.state.errors.priceMin !== ''}
                                 required
                                 id="priceMin"
                                 name="priceMin"
@@ -259,7 +279,7 @@ class MenuForm extends Component{
                             />
                         </Grid>                        <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.cantMax != ''}
+                                error = {this.state.errors.cantMax !== ''}
                                 id="cantMax"
                                 name="cantMax"
                                 label={i18n.t("MaxQuantity.label")}
@@ -271,7 +291,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.priceMax != ''}
+                                error = {this.state.errors.priceMax !== ''}
                                 id="priceMax"
                                 name="priceMax"
                                 label={i18n.t("PriceCantMax.label")}
@@ -283,7 +303,7 @@ class MenuForm extends Component{
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
-                                error = {this.state.errors.priceDelivery != ''}
+                                error = {this.state.errors.priceDelivery !== ''}
                                 id="deliveryValue"
                                 name="deliveryValue"
                                 label={i18n.t("DeliveryValue.label")}
@@ -307,7 +327,7 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <label> {i18n.t("dateInit.label")} </label>
                             <TextField
-                                error = {this.state.errors.dateInit != ''}
+                                error = {this.state.errors.dateInit !== ''}
                                 required
                                 id="dateInit"
                                 name="dateInit"
@@ -320,7 +340,7 @@ class MenuForm extends Component{
                         <Grid item xs={12} sm={6}>
                             <label> {i18n.t("dateEnd.label")} </label>
                             <TextField
-                                error = {this.state.errors.dateEnd != ''}
+                                error = {this.state.errors.dateEnd !== ''}
                                 required
                                 id="dateEnd"
                                 name="dateEnd"
@@ -340,6 +360,7 @@ class MenuForm extends Component{
                         {i18n.t('AddMenu.label')}
                     </Button>
                 </React.Fragment>
+                <NotificationContainer/>
             </div>
         );
     }
