@@ -44,6 +44,10 @@ class MenuForm extends Component{
     };
 
     thereAreErrors = () => {
+        return this.formHaveErrors() || this.formHaveNull();
+    };
+
+    formHaveErrors = () => {
         var ret = false;
         const ls = this.state.errors;
 
@@ -52,10 +56,23 @@ class MenuForm extends Component{
         return ret;
     };
 
+    formHaveNull = () => {
+        var ret = false;
+        const ls = this.state;
+
+        for ( const k in ls ) ret = ret || ls[k] === null ;
+
+        return ret;
+    };
+
     constructor(props) {
         super(props);
-        this.setState({"idProvider": sessionStorage.getItem('user_id')})
     }
+
+    componentDidMount(){
+        this.setState({"idProvider": sessionStorage.getItem('user_id')})
+        console.log(this.state.idProvider,'provider');
+    };
 
     handleChange = (event) => {
         event.preventDefault();
@@ -95,19 +112,19 @@ class MenuForm extends Component{
                 break;
             case 'priceMin':
                 errors.priceMin =
-                    (value < 0 || +value > 1000 || value >= this.state.price )
+                    (value < 0 || +value > 1000 || +value >= +this.state.price )
                         ? 'Error price cant min'
                         : '';
                 break;
             case 'cantMax':
                 errors.cantMax =
-                    (value < 40 || value > 150 || value <= this.state.cantMin || value >= this.state.cantMaxPeerDay)
+                    (value < 40 || value > 150 || +value <= +this.state.cantMin || +value >= +this.state.cantMaxPeerDay)
                         ? 'Error cant max'
                         : '';
                 break;
             case 'priceMax':
                 errors.priceMax =
-                    (value < 0 || value > 1000 || value >= this.state.priceMin)
+                    (value < 0 || value > 1000 || +value >= +this.state.priceMin)
                         ? 'Error price cant max'
                         : '';
                 break;
@@ -150,12 +167,12 @@ class MenuForm extends Component{
     };
 
     createMenu = () => {
-        if (!this.thereAreErrors()) {
+        if (this.thereAreErrors()) {
             NotificationManager.error('No se lleno bien el formulario', 'Revise los datos ingresados', 3000, () => {
                 alert('callback');
             });
         } else {
-            fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080') + "/api/menus", {
+            fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080') + "/api/menus",{
 
                 method: "POST",
                 headers: {
@@ -165,7 +182,10 @@ class MenuForm extends Component{
                 body: JSON.stringify(this.state)
             })
                 .then(res => {
+                        console.log(res.ok);
                     if (res.ok) {
+                        NotificationManager.success('El menu fue creado correctamente');
+                        this.cleanForm();
                         return res.json();
                     } else {
                         //TODO: PONER i18N
@@ -185,8 +205,12 @@ class MenuForm extends Component{
         }
     };
 
+    cleanForm(){
+        
+    };
+
     setCategories = values => {
-        this.setState({categories: values})
+        this.setState({category: values})
     };
 
     render(){
