@@ -19,8 +19,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Rating from '@material-ui/lab/Rating';
-import {NotificationManager} from "react-notifications";
 import i18n from "../i18n";
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,7 +51,6 @@ const useStyles = makeStyles(theme => ({
  const OrderForm = (params) => {
 
      let purchase = {
-         //idMenu: menu.id,
          idClient: sessionStorage.getItem('user_id'),
          deliveryDate: null,
          cant: null
@@ -123,7 +122,7 @@ const useStyles = makeStyles(theme => ({
     })(props => <Checkbox color="default" {...props} />);
 
     const buyMenu = (evt)=>{
-        purchase.menuId = menu.id;
+        purchase.idMenu = menu.id;
         purchase.cant = value;
         purchase.deliveryDate = deliveryDate;
         purchase.delivery = delivery;
@@ -139,11 +138,9 @@ const useStyles = makeStyles(theme => ({
             body: JSON.stringify(purchase)
         })
             .then(res => {
-                console.log(res.ok);
                 if (res.ok) {
                     NotificationManager.success( i18n.t('MenuSuccessCreate.label'));
                     const data = res.json();
-                    this.cleanForm();
                     return data;
                 } else {
                     NotificationManager.error(i18n.t('ConnetionError.label'), 'Upsss!!!', 5000, () => {
@@ -152,18 +149,14 @@ const useStyles = makeStyles(theme => ({
                     throw Error(res.statusText);
                 }
             })
-            .then(json => {
-                this.setState({
-                    isLoaded: true,
-                    token: json
-                });
-            })
             .catch(error => console.error(error));
     };
 
     return (
         <div className={classes.root}>
-                <Paper className={classes.paper}>
+            <NotificationContainer/>
+
+            <Paper className={classes.paper}>
             <Grid container spacing={10}>
                     <Grid item xs={6}>
                         <Image
