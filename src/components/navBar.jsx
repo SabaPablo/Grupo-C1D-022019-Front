@@ -198,7 +198,7 @@ export default function MiniDrawer(props) {
                     <Typography className={classes.title} variant="h6" noWrap>
                         Viandas YA
                     </Typography>
-                    <Lang/>
+                    <Lang />
                 </Toolbar>
             </AppBar>
             <Drawer

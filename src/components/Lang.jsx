@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import i18n from "../i18n";
 
 const useStyles = makeStyles(theme => ({
     formControl: {
@@ -28,14 +29,14 @@ const LangSelection = (langEv) => {
     return (
         <div>
             <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">Idioma</InputLabel>
+                <InputLabel htmlFor="age-native-simple">{i18n.t('Language.label')}</InputLabel>
                 <Select
                     native
                     value={lang}
                     onChange={handleChange}
                 >
-                    <option value={"es"}>ESPAÑOL</option>
-                    <option value={"en"}>INGLES</option>
+                    <option value={"es"}>{i18n.t('Spanish.label')}</option>
+                    <option value={"en"}>{i18n.t('English.label')}</option>
                 </Select>
             </FormControl>
         </div>

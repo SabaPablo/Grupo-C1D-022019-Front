@@ -26,6 +26,7 @@ i18next
                     Dessert:{ label: 'Dessert'},
                     DontHaveAccount: { label: 'Don\'t have an account? Sign Up' },
                     Drink: { label: 'Drink' },
+                    English: { label: 'English' },
                     Error:{
                         Name:{label: 'the name must be between 4 and 30 characters.'}
                     },
@@ -34,6 +35,7 @@ i18next
                     Fish: { label: 'Fish' },
                     ForgotPassword: { label: 'Forgot password?' },
                     Grill: { label: 'Grill' },
+                    Language: { label: 'Language' },
                     LastName: { label: 'Last Name' },
                     Mail: { label: 'E-Mail' },
                     MaxQuantity: { label: 'Maximum quantity' },
@@ -53,6 +55,7 @@ i18next
                     Register: { label: 'Register' },
                     RememberMe: { label: 'Remember Me'},
                     SignIn: { label: 'Sign In' },
+                    Spanish: { label: 'Spanish' },
                     State: { label: 'State' },
                     TermsAndConditions: { label: 'I agree terms and conditions' },
                     UrlImage: { label: 'Image URL'},
@@ -82,6 +85,7 @@ i18next
                     Dessert:{ label: 'Postre'},
                     DontHaveAccount: { label: 'No tengo cuenta. Registrarme.' },
                     Drink: { label: 'Bebidas' },
+                    English: { label: 'Inglés' },
                     Error:{
                         Name:{label: 'El nombre debe tener entr 4 y 30 letras.'}
                     },
@@ -90,6 +94,7 @@ i18next
                     Fish: { label: 'Pescado' },
                     ForgotPassword: { label: 'Olvidé mi contraseña' },
                     Grill: { label: 'Parrilla' },
+                    Language: { label: 'Lenguaje' },
                     LastName: { label: 'Apellido' },
                     Mail: { label: 'Mail' },
                     MaxQuantity: { label: 'Cantidad máxima' },
@@ -109,6 +114,7 @@ i18next
                     Register: { label: 'Registro', },
                     RememberMe: { label: 'Recordar'},
                     SignIn: {label: 'Ingresar' },
+                    Spanish: { label: 'Español' },
                     State: { label: 'Provicia' },
                     TermsAndConditions: { label: 'Acepto los terminos y condiciones' },
                     UrlImage: { label: 'URL de imágen'},

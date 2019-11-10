@@ -10,6 +10,7 @@ import moment from "moment";
 import MultipleSelect from "./MultipleSelect";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import history from "./History";
 
 class MenuForm extends Component{
     state = {
@@ -44,10 +45,10 @@ class MenuForm extends Component{
     };
 
     cleanForm(){
-        var errors = this.state.errors;
+        var errorsPrev = this.state.errors;
         var values = this.state;
-        for (const k in values) this.setState(values[k] = null);
-        for (const k in errors) this.setState();
+        for (const k in values) this.setState(values[k] = null)
+        this.setState(this.state.errors = errorsPrev);
     };
 
     thereAreErrors = () => {
@@ -188,15 +189,14 @@ class MenuForm extends Component{
                 body: JSON.stringify(this.state)
             })
                 .then(res => {
-                        console.log(res.ok);
                     if (res.ok) {
                         NotificationManager.success( i18n.t('MenuSuccessCreate.label'));
                         const data = res.json();
-                        this.cleanForm();
+                        //this.cleanForm();
+                        history.push('/sell');
                         return data;
                     } else {
-                        //TODO: PONER i18N
-                        NotificationManager.error('Error de conexion', 'Click me!', 5000, () => {
+                        NotificationManager.error(i18n.t('ConnetionError.label'), 'Upsss!!!', 5000, () => {
                             alert('callback');
                         });
                         throw Error(res.statusText);
@@ -213,7 +213,7 @@ class MenuForm extends Component{
     };
 
     setCategories = values => {
-        this.setState({category: values})
+        this.setState({category: values.map(v => v.value)});
     };
 
     render(){
