@@ -44,38 +44,18 @@ class MenuForm extends Component{
         }
     };
 
-    cleanForm(){
-        var errorsPrev = this.state.errors;
-        var values = this.state;
-        for (const k in values) this.setState(values[k] = null)
-        this.setState(this.state.errors = errorsPrev);
-    };
-
     thereAreErrors = () => {
         return this.formHaveErrors() || this.formHaveNull();
     };
 
     formHaveErrors = () => {
-        var ret = false;
-        const ls = this.state.errors;
-
-        for ( const k in ls ) ret = ret || ls[k] !== '' ;
-
-        return ret;
+        return !Object.values(this.state.errors).every(o => o === '');
     };
 
     formHaveNull = () => {
-        var ret = false;
-        const ls = this.state;
-
-        for ( const k in ls ) ret = ret || ls[k] === null ;
-
-        return ret;
+        return !Object.values(this.state).every(o => o !== null);
     };
 
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount(){
         this.setState({"idProvider": sessionStorage.getItem('user_id')})
