@@ -103,7 +103,6 @@ const Home = () => {
                     />
                 </div>
                 <Menues menues={menus}  />
-
             </div>
         );
 
