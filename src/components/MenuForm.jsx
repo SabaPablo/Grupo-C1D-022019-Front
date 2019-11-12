@@ -284,7 +284,8 @@ class MenuForm extends Component{
                                 noValidate
                                 type={"number"}
                             />
-                        </Grid>                        <Grid item xs={12} sm={6}>
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 error = {this.state.errors.cantMax !== ''}
                                 id="cantMax"
