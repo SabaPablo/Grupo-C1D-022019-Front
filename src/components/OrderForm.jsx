@@ -103,6 +103,17 @@ const useStyles = makeStyles(theme => ({
          setDeliveryDate(evt.target.value);
      };
 
+     const Delivery = () => {
+
+             if(delivery){
+                 return <h3> Total: {value*menu.price}$ + {menu.deliveryValue}$ (envio) = {value*menu.price + menu.deliveryValue}$ </h3>
+             } else {
+                 return <h3> Total: {value*menu.price}$</h3>
+             }
+
+
+     }
+
     const handleBlur = () => {
         if (value < 0) {
             setValue(0);
@@ -176,7 +187,7 @@ const useStyles = makeStyles(theme => ({
                                     </Grid>
                                     <Grid item xs={12}>
                                         <Box component="fieldset" mb={3} borderColor="transparent">
-                                            <Typography component="legend">Custom empty icon</Typography>
+                                            <Typography component="legend">Valoración</Typography>
                                             <Rating value={menu.rate} readOnly />
                                         </Box>
                                     </Grid>
@@ -211,6 +222,7 @@ const useStyles = makeStyles(theme => ({
                                          {value*menu.price}$
                                     </Typography>
                                 </Grid>
+
                                 <Grid item xs={6}>
                                     <TextField
                                         id="date"
@@ -235,6 +247,9 @@ const useStyles = makeStyles(theme => ({
                                     />
                                 </Grid>
                                     <Grid item xs={12}>
+                                        <Delivery></Delivery>
+                                    </Grid>
+                                    <Grid item xs={12}>
                                 <Divider variant="middle" className={classes.divider}/>
                                     </Grid>
                                     <Grid item xs={12}>
@@ -244,12 +259,12 @@ const useStyles = makeStyles(theme => ({
                                             aria-controls="panel1a-content"
                                             id="panel1a-header"
                                         >
-                                            <Typography className={classes.heading}>Vendedor : Pizzeria los hijos de puta</Typography>
+                                            <Typography className={classes.heading}>Vendedor : Proximamente</Typography>
                                         </ExpansionPanelSummary>
                                         <ExpansionPanelDetails>
                                             <Typography>
-                                                Localidad: Villa patito
-                                                Especialidad: culiarse a tu vieja
+                                                Localidad: Proximamente
+                                                Especialidad: Proximamente
                                             </Typography>
                                         </ExpansionPanelDetails>
                                     </ExpansionPanel>
