@@ -32,6 +32,7 @@ import Buy from "./Buy";
 import MenuForm from "./MenuForm";
 import Credits from "./Credits";
 import Lang from "./Lang";
+import OrderForm from "./OrderForm";
 
 const drawerWidth = 240;
 
@@ -197,7 +198,7 @@ export default function MiniDrawer(props) {
                     <Typography className={classes.title} variant="h6" noWrap>
                         Viandas YA
                     </Typography>
-                    <Lang/>
+                    <Lang />
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -290,6 +291,7 @@ export default function MiniDrawer(props) {
                         <PrivateRoute exact path="/sell" component={Sell} />
                         <PrivateRoute exact path="/credit" component={Credits} />
                         <PrivateRoute exact path="/menu/add" component={MenuForm} />
+                        <PrivateRoute exact path="/order/:number" component={OrderForm} />
                         <PrivateRoute exact path="/contacts" component={Contact} />
                         <PrivateRoute exact path="/users" component={Users} />
                     </Switch>

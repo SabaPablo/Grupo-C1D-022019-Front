@@ -11,7 +11,6 @@ import axios from 'axios';
 
 const Home = () => {
 
-
     const useStyles = makeStyles(theme => ({
 
         hide: {
@@ -53,7 +52,6 @@ const Home = () => {
             },
         }
     }));
-
 
     const classes =useStyles();
 
@@ -104,8 +102,7 @@ const Home = () => {
                         onKeyPress={handleKeyPress}
                     />
                 </div>
-                <Menues menues={menus}/>
-
+                <Menues menues={menus}  />
             </div>
         );
 
