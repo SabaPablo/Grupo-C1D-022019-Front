@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
     },
 }));
-const Credits = () => {
+const Credits = (props) => {
     const classes = useStyles();
 
     const [amount, setAmount] = useState(0.0);
@@ -52,8 +52,8 @@ const Credits = () => {
 
             })
             .then(data => {
-                console.log(data);
-                setuserCredit(data.data.amount)
+                setuserCredit(data.data.amount);
+                props.setCredit(data.data.amount)
             }).catch(console.log);
     };
 
