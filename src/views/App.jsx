@@ -1,10 +1,10 @@
 import React from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
-import NavBar from "./navBar"
+import NavBar from "../components/NavBar"
 import Users from "./Users";
 import SignIn from "./Login";
-import history from "./History";
-import {PrivateRoute} from "./PrivateRoute";
+import history from "../utils/history";
+import {PrivateRoute} from "../components/PrivateRoute";
 
 
 

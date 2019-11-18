@@ -10,7 +10,7 @@ import moment from "moment";
 import MultipleSelect from "./MultipleSelect";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import history from "./History";
+import history from "../utils/history";
 
 class MenuForm extends Component{
     state = {

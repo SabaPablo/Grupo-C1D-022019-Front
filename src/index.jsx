@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './dist/css/index.css';
-import App from './components/App';
+import App from './views/App';
 import * as serviceWorker from './serviceWorker';
 import {Container, MuiThemeProvider} from "@material-ui/core";
 import {I18nextProvider} from "react-i18next";
