@@ -1,27 +1,27 @@
 const contentData = [
   {
-    title: "Configure other identity providers",
-    link: "https://auth0.com/docs/connections",
+    title: "Elegir entre miles de menues",
+    link: "",
     description:
-      "Auth0 supports social providers as Facebook, Twitter, Instagram and 100+, Enterprise providers as Microsoft Office 365, Google Apps, Azure, and more. You can also use any OAuth2 Authorization Server."
+      "Elige entre las comidas que mas te gusten en nuestra extensa lista de menues de expertos. Miles de distintos menues estan esperando para que te deleites con los que mas quieres."
   },
   {
-    title: "Enable Multifactor Authentication",
-    link: "https://auth0.com/docs/multifactor-authentication",
+    title: "Valora a quien lo merece y vuelve a elegir",
+    link: "",
     description:
-      "Add an extra layer of security by enabling Multi-factor Authentication, requiring your users to provide more than one piece of identifying information. Push notifications, authenticator apps, SMS, and DUO Security are supported."
+      "Valora la buena antención, el compromiso y sobre todo la buena comida. Compartela entre los usuarios y obten recomendaciones de otros."
   },
   {
-    title: "Anomaly Detection",
-    link: "https://auth0.com/docs/anomaly-detection",
+    title: "Arma tu cronograma y ahorra",
+    link: "",
     description:
-      "Auth0 can detect anomalies and stop malicious attempts to access your application. Anomaly detection can alert you and your users of suspicious activity, as well as block further login attempts."
+      "Viandas ya cuenta con el mejor sistema para que no falte nada para tus fiestas o eventos. También con la compra de productos en cantidad y con la ayuda de otros usuarios puedes ahorrar mucho dinero en cada menu"
   },
   {
-    title: "Learn About Rules",
-    link: "https://auth0.com/docs/rules",
+    title: "Emprende con tu talento",
+    link: "",
     description:
-      "Rules are JavaScript functions that execute when a user authenticates to your application. They run once the authentication process is complete, and you can use them to customize and extend Auth0's capabilities."
+      "Si amas cocinar, si tu pasión son las artes de la cocina, puedes emprender tu negocio publicando aqui tus menues. Con las mejores tazas, con cuentas claras y con un excelente y muy amplio cartel de clientes."
   }
 ];
 

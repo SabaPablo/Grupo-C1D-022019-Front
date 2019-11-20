@@ -26,7 +26,6 @@ import Main from "../views/Main";
 import {Route, Switch} from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import Contact from "../views/Contacts";
-import Users from "../views/Users";
 import Sell from "../views/Sell";
 import Buy from "../views/Buy";
 import MenuForm from "./MenuForm";

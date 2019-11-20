@@ -1,10 +1,12 @@
 import React from "react";
+import logo from "../assets/cactus.png"
 
 const Footer = () => (
   <footer className="bg-light p-3 text-center">
-    <div className="logo" />
+    <div className="" />
+      <img src={logo} style={{height :'80px'}}/>
     <p>
-      Sample project provided by <a href="https://auth0.com">Auth0</a>
+      Powered by <a href="https://unquipedia.com.ar">Unquipedia</a>
     </p>
   </footer>
 );
