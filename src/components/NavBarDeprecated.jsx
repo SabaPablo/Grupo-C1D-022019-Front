@@ -22,9 +22,9 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HomeIcon from '@material-ui/icons/Home';
-import Home from "../views/Home";
+import Main from "../views/Main";
 import {Route, Switch} from "react-router-dom";
-import {PrivateRoute} from "./PrivateRoute";
+import PrivateRoute from "./PrivateRoute";
 import Contact from "../views/Contacts";
 import Users from "../views/Users";
 import Sell from "../views/Sell";
@@ -34,6 +34,8 @@ import Credits from "../views/Credits";
 import Lang from "./Lang";
 import OrderForm from "./OrderForm";
 import axios from "axios";
+import Profile from "../views/Profile";
+import {useAuth0} from "../react-auth0-spa";
 
 const drawerWidth = 240;
 
@@ -184,7 +186,7 @@ export default function MiniDrawer(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [creditAmount, setCreditAmount ] = React.useState(0);
-
+    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     useEffect(() => {
         axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/credit?user_id=${sessionStorage.getItem('user_id')}`)
@@ -213,6 +215,11 @@ export default function MiniDrawer(props) {
         props.history.push(`/profile`);
 
     };
+
+    const logoutWithRedirect = () =>
+        logout({
+            returnTo: window.location.origin
+        });
     const goToConfig = () => {
         props.history.push(`/config`);
 
@@ -225,6 +232,7 @@ export default function MiniDrawer(props) {
         props.history.push(`/cart`);
     };
     const goOut = () => {
+        logoutWithRedirect()
         sessionStorage.setItem('login', 'off');
         sessionStorage.setItem('user_id', '0');
         props.history.push(`/login`);
@@ -347,14 +355,15 @@ export default function MiniDrawer(props) {
                 <div className={classes.toolbar} />
                 <Route>
                     <Switch>
-                        <PrivateRoute exact path="/Home" component={Home} />
+                        <PrivateRoute exact path="/Home" component={Main} />
                         <PrivateRoute exact path="/cart" component={Buy} />
                         <PrivateRoute exact path="/sell" component={Sell} />
                         <PrivateRoute exact path="/credit" component={()=><Credits setCredit={setCreditAmount}/>} />
                         <PrivateRoute exact path="/menu/add" component={MenuForm} />
+                        <PrivateRoute exact path="/profile" component={Profile} />
                         <PrivateRoute exact path="/order/:number" component={OrderForm} />
                         <PrivateRoute exact path="/contacts" component={Contact} />
-                        <PrivateRoute exact path="/users" component={Users} />
+
                     </Switch>
                 </Route>
             </main>

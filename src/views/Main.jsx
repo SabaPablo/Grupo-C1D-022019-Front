@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 
 
-const Home = () => {
+const Main = () => {
 
     const useStyles = makeStyles(theme => ({
 
@@ -108,4 +108,4 @@ const Home = () => {
 
 };
 
-export default Home;
+export default Main;
