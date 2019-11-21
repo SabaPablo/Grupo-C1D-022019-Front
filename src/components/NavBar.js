@@ -5,8 +5,6 @@ import {useAuth0} from "../react-auth0-spa";
 import history from "../utils/history";
 import axios from "axios";
 import Home from "../views/Home";
-import userStile from "../utils/useStyles"
-
 
 const NavBar = () => {
   const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
