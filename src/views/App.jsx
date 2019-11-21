@@ -1,11 +1,13 @@
 import React from 'react';
-import {Router, Route, Switch} from 'react-router-dom';
+import {Route, Router, Switch} from 'react-router-dom';
 import NavBar from "../components/NavBar"
-import Users from "./Users";
-import SignIn from "./Login";
-import history from "../utils/history";
-import {PrivateRoute} from "../components/PrivateRoute";
+import {Container} from "reactstrap";
 
+import history from "../utils/history";
+import PrivateRoute from "../components/PrivateRoute";
+import Footer from "../components/Footer";
+import Users from "./Users";
+import MiniDrawer from "../components/NavBarDeprecated";
 
 
 class App extends React.Component {
@@ -18,13 +20,17 @@ class App extends React.Component {
     render() {
         return (
             <Router history={history}>
-                <Switch>
-                    <Route exact path="/login" component={SignIn}/>
-                    <Route exact path="/register" component={Users} />
-                    <Route path="/">
-                    <PrivateRoute path="/" component={NavBar} />
-                    </Route>
-                </Switch>
+                <div id="app" className="d-flex flex-column h-100">
+
+                    <Container className="flex-grow-1 mt-5">
+                        <Switch>
+                            <Route path="/" exact component={NavBar} />
+                            <PrivateRoute exact path="/register" component={Users} />
+                            <PrivateRoute path="/" component={MiniDrawer} />
+                        </Switch>
+                    </Container>
+                    <Footer />
+                </div>
             </Router>
         );
     }
