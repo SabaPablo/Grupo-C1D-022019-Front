@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../dist/css/App.css';
-import Menues from "./Menues";
+import Menues from "../components/Menues";
 import {makeStyles} from "@material-ui/core";
 import {fade} from "@material-ui/core/styles";
 import axios from 'axios';

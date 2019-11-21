@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
-import history from "./History";
+import history from "../utils/history";
 import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({

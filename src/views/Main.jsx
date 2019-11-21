@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../dist/css/App.css';
-import Menues from "./Menues";
+import Menues from "../components/Menues";
 import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core";
 import {fade} from "@material-ui/core/styles";
@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 
 
-const Home = () => {
+const Main = () => {
 
     const useStyles = makeStyles(theme => ({
 
@@ -108,4 +108,4 @@ const Home = () => {
 
 };
 
-export default Home;
+export default Main;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import {fade, makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -22,21 +22,68 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import HomeIcon from '@material-ui/icons/Home';
-import Home from "./Home";
+import Main from "../views/Main";
 import {Route, Switch} from "react-router-dom";
-import {PrivateRoute} from "./PrivateRoute";
-import Contact from "./Contacts";
-import Users from "./Users";
-import Sell from "./Sell";
-import Buy from "./Buy";
+import PrivateRoute from "./PrivateRoute";
+import Contact from "../views/Contacts";
+import Sell from "../views/Sell";
+import Buy from "../views/Buy";
 import MenuForm from "./MenuForm";
-import Credits from "./Credits";
+import Credits from "../views/Credits";
 import Lang from "./Lang";
 import OrderForm from "./OrderForm";
+import axios from "axios";
+import Profile from "../views/Profile";
+import {useAuth0} from "../react-auth0-spa";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
+
+
+    grow: {
+        flexGrow: 1,
+    },
+
+    title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+        },
+        position:'float',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(10)
+    },
+
+    currentBalance: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+        },
+        position:'right',
+        marginLeft: theme.spacing(2),
+    },
+
+    amount: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+        },
+        position:'right',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(40)
+    },
+
+    lang: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+            display: 'block',
+        },
+        position:'right',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2)
+    },
+
     root: {
         display: 'flex',
     },
@@ -56,7 +103,7 @@ const useStyles = makeStyles(theme => ({
         }),
     },
     menuButton: {
-        marginRight: 36,
+        marginRight: theme.spacing(2),
     },
     hide: {
         display: 'none',
@@ -137,6 +184,16 @@ export default function MiniDrawer(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [creditAmount, setCreditAmount ] = React.useState(0);
+    const { logout } = useAuth0();
+
+    useEffect(() => {
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/credit?user_id=${sessionStorage.getItem('user_id')}`)
+            .then(res => {
+                console.log(res.data, "data credit");
+                setCreditAmount(res.data);
+            })
+    }, []);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -157,6 +214,11 @@ export default function MiniDrawer(props) {
         props.history.push(`/profile`);
 
     };
+
+    const logoutWithRedirect = () =>
+        logout({
+            returnTo: window.location.origin
+        });
     const goToConfig = () => {
         props.history.push(`/config`);
 
@@ -169,6 +231,7 @@ export default function MiniDrawer(props) {
         props.history.push(`/cart`);
     };
     const goOut = () => {
+        logoutWithRedirect()
         sessionStorage.setItem('login', 'off');
         sessionStorage.setItem('user_id', '0');
         props.history.push(`/login`);
@@ -195,10 +258,15 @@ export default function MiniDrawer(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography className={classes.title} variant="h6" noWrap>
+                    <Typography className={classes.grow } variant="h6" noWrap>
                         Viandas YA
                     </Typography>
-                    <Lang />
+                    <Typography className={classes.grow} variant="h7" noWrap>
+                        Saldo Actual: {creditAmount}
+                    </Typography>
+                    <div className={classes.lang}>
+                        <Lang />
+                    </div>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -286,14 +354,15 @@ export default function MiniDrawer(props) {
                 <div className={classes.toolbar} />
                 <Route>
                     <Switch>
-                        <PrivateRoute exact path="/Home" component={Home} />
+                        <PrivateRoute exact path="/Home" component={Main} />
                         <PrivateRoute exact path="/cart" component={Buy} />
                         <PrivateRoute exact path="/sell" component={Sell} />
-                        <PrivateRoute exact path="/credit" component={Credits} />
+                        <PrivateRoute exact path="/credit" component={()=><Credits setCredit={setCreditAmount}/>} />
                         <PrivateRoute exact path="/menu/add" component={MenuForm} />
+                        <PrivateRoute exact path="/profile" component={Profile} />
                         <PrivateRoute exact path="/order/:number" component={OrderForm} />
                         <PrivateRoute exact path="/contacts" component={Contact} />
-                        <PrivateRoute exact path="/users" component={Users} />
+
                     </Switch>
                 </Route>
             </main>
