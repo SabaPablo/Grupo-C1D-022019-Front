@@ -25,10 +25,6 @@ const NavBar = () => {
         })
   }
 
-
-  const classes = userStile;
-
-
   return (
     <div className="nav-container" style={{textAlign: 'right', alignSelf: 'stretch'}}>
         <Nav className="d-none d-md-block" navbar>

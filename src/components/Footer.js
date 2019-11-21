@@ -4,7 +4,7 @@ import logo from "../assets/cactus.png"
 const Footer = () => (
   <footer className="bg-light p-3 text-center">
     <div className="" />
-      <img src={logo} style={{height :'80px'}}/>
+      <img src={logo} style={{height :'80px'}} alt={'12Cactus'}/>
     <p>
       Powered by <a href="https://unquipedia.com.ar">Unquipedia</a>
     </p>

@@ -185,7 +185,7 @@ export default function MiniDrawer(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [creditAmount, setCreditAmount ] = React.useState(0);
-    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+    const { logout } = useAuth0();
 
     useEffect(() => {
         axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/credit?user_id=${sessionStorage.getItem('user_id')}`)
