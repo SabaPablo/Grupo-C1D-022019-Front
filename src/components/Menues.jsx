@@ -6,6 +6,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuCard from "./MenuCard";
 
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import Pagination from "material-ui-flat-pagination";
+
 const useStyles = makeStyles(theme => ({
     icon: {
         marginRight: theme.spacing(2),
@@ -37,6 +40,14 @@ const Menues = ( { menues }) => {
 
     const classes = useStyles();
 
+    const [offset, setOffset] = React.useState(0);
+
+    const handleClick = ( pagNumber ) => {
+        console.log(pagNumber,"offset");
+        setOffset( pagNumber );
+        console.log(offset)
+    };
+
     return (
         <React.Fragment>
             <CssBaseline />
@@ -53,14 +64,19 @@ const Menues = ( { menues }) => {
                         ))
                         }
                     </Grid>
+
+                    <CssBaseline />
+                    <Pagination
+                        limit={10}
+                        offset={offset}
+                        total={100}
+                        onClick={(e, offset) => handleClick(offset)}
+                    />
+
                 </Container>
             </main>
             {/* Footer */}
-            <footer className={classes.footer}>
-                <Typography variant="h6" align="center" gutterBottom>
-                    12 Cactus
-                </Typography>
-             </footer>
+
             {/* End footer */}
         </React.Fragment>
     );
