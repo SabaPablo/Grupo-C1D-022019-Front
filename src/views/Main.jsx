@@ -58,11 +58,18 @@ const Main = () => {
     const [menus, setMenues] = useState([]);
     const [query, setQuery] = useState('');
 
+    const pageable = {
+        pageNumber: 1,
+        pageSize: 6
+    };
+
     useEffect(() => {
-        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + '/api/menus')
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus?pageNumber=${pageable.pageNumber}&pageSize=${pageable.pageSize}`)
             .then(res => {
                 const menues = res.data;
-                setMenues(menues) })
+                setMenues(menues.content)
+                console.log(menues,"MENUES");
+            })
 
     }, []);
 
@@ -72,7 +79,7 @@ const Main = () => {
     };
 
     const searchWithQuery = () => {
-        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/query?query=${query}`)
+        axios.post((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/query?query=${query}`)
             .then(res => {
                 const menues = res.data;
                 setMenues(menues) })
