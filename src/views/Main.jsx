@@ -8,7 +8,6 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import axios from 'axios';
 import Pagination from "material-ui-flat-pagination";
-import Container from "@material-ui/core/Container";
 
 
 const Main = () => {
