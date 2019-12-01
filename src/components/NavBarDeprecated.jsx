@@ -241,7 +241,7 @@ export default function MiniDrawer(props) {
         props.history.push(`/login`);
     };
 
-    const { loading, user } = useAuth0();
+    const { user } = useAuth0();
 
     return (
         <div className={classes.root}>
