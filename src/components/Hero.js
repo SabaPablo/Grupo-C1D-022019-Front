@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from "../assets/cactus.png";
+import logo from "../assets/logo.png";
 import background from "../assets/background.jpg"
 
 

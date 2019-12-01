@@ -12,6 +12,9 @@ body {
   text-align: center;
   color: white;
 }
+.pictureSize{
+  width:6%;
+}
 
 .new-task {
   display: block;
