@@ -59,7 +59,6 @@ const useStyles = makeStyles(theme => ({
      useEffect(() => {
          axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/${params.match.params.number}`)
              .then(res => {
-                 console.log(res.data)
                  setMenu(res.data);
                   })
 
