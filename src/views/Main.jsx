@@ -88,8 +88,7 @@ const Main = () => {
                 setMenues(menues.content);
                 setPages(menues.totalElements);
             })
-
-    }, []);
+    }, [pageable.pageNumber, pageable.pageSize]);
 
 
     const handleOnChange = (e) => {

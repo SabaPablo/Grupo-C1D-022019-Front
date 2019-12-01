@@ -37,14 +37,6 @@ const Menues = ( { menues }) => {
 
     const classes = useStyles();
 
-    const [offset, setOffset] = React.useState(0);
-
-    const handleClick = ( pagNumber ) => {
-        console.log(menues.length,"menues");
-        setOffset( pagNumber );
-        console.log(offset)
-    };
-
     return (
         <React.Fragment>
             <CssBaseline />
