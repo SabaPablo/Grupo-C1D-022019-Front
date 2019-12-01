@@ -34,12 +34,6 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
-    pagination:{
-        marginTop: theme.spacing(4),
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
 }));
 
 const Menues = ( { menues }) => {
@@ -70,15 +64,6 @@ const Menues = ( { menues }) => {
                         ))
                         }
                     </Grid>
-
-                    <Pagination
-                        className={classes.pagination}
-                        limit={10}
-                        offset={offset}
-                        total={100}
-                        onClick={(e, offset) => handleClick(offset)}
-                    />
-
                 </Container>
             </main>
             {/* Footer */}

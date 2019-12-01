@@ -7,6 +7,8 @@ import {fade} from "@material-ui/core/styles";
 import SearchIcon from '@material-ui/icons/Search';
 
 import axios from 'axios';
+import Pagination from "material-ui-flat-pagination";
+import Container from "@material-ui/core/Container";
 
 
 const Main = () => {
@@ -50,25 +52,42 @@ const Main = () => {
             [theme.breakpoints.up('md')]: {
                 width: 200,
             },
-        }
+        },
+        pagination:{
+            marginBottom: theme.spacing(4),
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
     }));
 
     const classes =useStyles();
 
     const [menus, setMenues] = useState([]);
+    const [pages, setPages] = useState(0);
     const [query, setQuery] = useState('');
+    const [offset, setOffset] = React.useState(0);
 
     const pageable = {
-        pageNumber: 1,
+        pageNumber: 0,
         pageSize: 6
+    };
+
+    const handleClick = (offset, pagNumber ) => {
+        setOffset( offset );
+        axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus?pageNumber=${pagNumber-1}&pageSize=${pageable.pageSize}`)
+            .then(res => {
+                const menues = res.data;
+                setMenues(menues.content);
+            })
     };
 
     useEffect(() => {
         axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus?pageNumber=${pageable.pageNumber}&pageSize=${pageable.pageSize}`)
             .then(res => {
                 const menues = res.data;
-                setMenues(menues.content)
-                console.log(menues,"MENUES");
+                setMenues(menues.content);
+                setPages(menues.totalElements);
             })
 
     }, []);
@@ -110,6 +129,14 @@ const Main = () => {
                     />
                 </div>
                 <Menues menues={menus}  />
+                <Pagination
+                    className={classes.pagination}
+                    limit={pageable.pageSize} //row x pages
+                    offset={offset} //row to skip
+                    total={pages}  // total rows
+                    onClick={(e,offset, page) => handleClick(offset, page)}
+                />
+
             </div>
         );
 
