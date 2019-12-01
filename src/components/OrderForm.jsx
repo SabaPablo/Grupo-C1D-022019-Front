@@ -151,8 +151,7 @@ const useStyles = makeStyles(theme => ({
             .then(res => {
                 if (res.ok) {
                     NotificationManager.success( i18n.t('MenuSuccessCreate.label'));
-                    const data = res.json();
-                    return data;
+                    return res.json();
                 } else {
                     NotificationManager.error(i18n.t('ConnetionError.label'), 'Upsss!!!', 5000, () => {
                         alert('callback');
