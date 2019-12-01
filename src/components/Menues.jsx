@@ -34,6 +34,12 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
+    pagination:{
+        marginTop: theme.spacing(4),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 }));
 
 const Menues = ( { menues }) => {
@@ -43,7 +49,7 @@ const Menues = ( { menues }) => {
     const [offset, setOffset] = React.useState(0);
 
     const handleClick = ( pagNumber ) => {
-        console.log(pagNumber,"offset");
+        console.log(menues.length,"menues");
         setOffset( pagNumber );
         console.log(offset)
     };
@@ -65,8 +71,8 @@ const Menues = ( { menues }) => {
                         }
                     </Grid>
 
-                    <CssBaseline />
                     <Pagination
+                        className={classes.pagination}
                         limit={10}
                         offset={offset}
                         total={100}
