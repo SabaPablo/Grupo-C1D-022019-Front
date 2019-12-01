@@ -13,6 +13,7 @@ const NavBar = () => {
     axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') +  `/api/clientsbymail/${user.email}` )
         .then(res => {
           const userId = res.data;
+            console.log(userId);
           if(userId){
             sessionStorage.setItem('user_id', userId);
             history.push('/Home');
@@ -22,7 +23,7 @@ const NavBar = () => {
           }
         })
   }
-
+    console.log(user, "user");
   return (
     <div className="nav-container" style={{textAlign: 'right', alignSelf: 'stretch'}}>
         <Nav className="d-none d-md-block" navbar>

@@ -87,6 +87,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
     },
+    pictureSize:{
+        width: '8%',
+    },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
         transition: theme.transitions.create(['width', 'margin'], {
@@ -177,6 +180,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
+
 }));
 
 
@@ -237,6 +241,8 @@ export default function MiniDrawer(props) {
         props.history.push(`/login`);
     };
 
+    const { loading, user } = useAuth0();
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -264,6 +270,11 @@ export default function MiniDrawer(props) {
                     <Typography className={classes.grow} variant="h7" noWrap>
                         Saldo Actual: {creditAmount}
                     </Typography>
+                    <img
+                        src={user.picture}
+                        alt="Profile"
+                        className="rounded-circle w-10 pictureSize profile-picture mb-3 mb-md-0"
+                    />
                     <div className={classes.lang}>
                         <Lang />
                     </div>
