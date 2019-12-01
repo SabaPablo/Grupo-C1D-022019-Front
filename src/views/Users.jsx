@@ -8,7 +8,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
-import {useAuth0} from "../react-auth0-spa";
+import Container from "../components/MapContainer";
 
 
 class Users extends Component{
@@ -272,6 +272,8 @@ class Users extends Component{
                             />
                         </Grid>
                     </Grid>
+                    <Container />
+
                     <Button
                         variant="contained"
                         color="primary"
