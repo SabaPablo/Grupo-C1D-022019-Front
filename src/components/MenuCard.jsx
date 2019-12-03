@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import history from "../utils/history";
 import {makeStyles} from "@material-ui/core";
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -44,6 +45,7 @@ const useStyles = makeStyles(theme => ({
 function MenuCard({ menu }) {
 
     const classes = useStyles();
+    const { t, i18n } = useTranslation();
 
     const buyMenu = () => {
         history.push(`/order/${menu.id}`);
@@ -74,7 +76,7 @@ function MenuCard({ menu }) {
                     size="small"
                     color="primary"
                     onClick={buyMenu}>
-                    Comprar
+                    {t("Comprar")}
                 </Button>
             </CardActions>
         </Card>

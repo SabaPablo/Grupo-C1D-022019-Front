@@ -1,6 +1,8 @@
 import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 i18next
+    .use(initReactI18next)
     .init({
         interpolation: {
             // React already does escaping
@@ -66,6 +68,7 @@ i18next
                     Vegetarian: { label: 'Vegetarian' },
                     Wine: { label: 'Wine' },
                     ZipCode: { label: 'Zip Code' },
+                    Comprar: 'Buy'
                 },
             },
             es: {
@@ -125,6 +128,7 @@ i18next
                     Vegetarian: { label: 'Vegetariano' },
                     Wine: { label: 'Vino' },
                     ZipCode: { label: 'Código Postal' },
+                    Comprar: 'Comprar'
                 },
             },
         },
