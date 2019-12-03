@@ -76,7 +76,7 @@ function MenuCard({ menu }) {
                     size="small"
                     color="primary"
                     onClick={buyMenu}>
-                    {t("Comprar")}
+                    {t("Buy")}
                 </Button>
             </CardActions>
         </Card>

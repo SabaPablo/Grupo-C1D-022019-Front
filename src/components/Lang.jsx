@@ -36,8 +36,8 @@ const LangSelection = () => {
                     value={lang}
                     onChange={handleChange}
                 >
-                    <option value={"es"}>{t('Spanish.label')}</option>
-                    <option value={"en"}>{t('English.label')}</option>
+                    <option value={"es"}>{t('Spanish')}</option>
+                    <option value={"en"}>{t('English')}</option>
                 </Select>
             </FormControl>
         </div>
