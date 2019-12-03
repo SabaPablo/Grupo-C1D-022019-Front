@@ -1,10 +1,10 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MenuCard from "./MenuCard";
+
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -56,11 +56,7 @@ const Menues = ( { menues }) => {
                 </Container>
             </main>
             {/* Footer */}
-            <footer className={classes.footer}>
-                <Typography variant="h6" align="center" gutterBottom>
-                    12 Cactus
-                </Typography>
-             </footer>
+
             {/* End footer */}
         </React.Fragment>
     );
