@@ -19,8 +19,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import axios from "axios";
 import Box from "@material-ui/core/Box";
 import Rating from '@material-ui/lab/Rating';
-import i18n from "../i18n";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {useTranslation} from "react-i18next";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
  const OrderForm = (params) => {
-
+     const { t } = useTranslation();
      let purchase = {
          idClient: sessionStorage.getItem('user_id'),
          deliveryDate: null,
@@ -59,7 +59,6 @@ const useStyles = makeStyles(theme => ({
      useEffect(() => {
          axios.get((process.env.REACT_APP_API_URL || 'http://localhost:8080') + `/api/menus/${params.match.params.number}`)
              .then(res => {
-                 console.log(res.data)
                  setMenu(res.data);
                   })
 
@@ -112,7 +111,7 @@ const useStyles = makeStyles(theme => ({
              }
 
 
-     }
+     };
 
     const handleBlur = () => {
         if (value < 0) {
@@ -132,7 +131,7 @@ const useStyles = makeStyles(theme => ({
         checked: {},
     })(props => <Checkbox color="default" {...props} />);
 
-    const buyMenu = (evt)=>{
+    const buyMenu = ()=>{
         purchase.idMenu = menu.id;
         purchase.cant = value;
         purchase.deliveryDate = deliveryDate;
@@ -150,11 +149,10 @@ const useStyles = makeStyles(theme => ({
         })
             .then(res => {
                 if (res.ok) {
-                    NotificationManager.success( i18n.t('MenuSuccessCreate.label'));
-                    const data = res.json();
-                    return data;
+                    NotificationManager.success(t('MenuSuccessCreate'));
+                    return res.json();
                 } else {
-                    NotificationManager.error(i18n.t('ConnetionError.label'), 'Upsss!!!', 5000, () => {
+                    NotificationManager.error(t('ConnetionError'), 'Upsss!!!', 5000, () => {
                         alert('callback');
                     });
                     throw Error(res.statusText);
@@ -226,7 +224,7 @@ const useStyles = makeStyles(theme => ({
                                 <Grid item xs={6}>
                                     <TextField
                                         id="date"
-                                        label="Fecha de pedido"
+                                        label={t("DateOfDeparture")}
                                         type="date"
                                         className={classes.textField}
                                         onChange={handleDateChange}
@@ -271,7 +269,7 @@ const useStyles = makeStyles(theme => ({
                                     </Grid>
                                 <Grid item xs={12}>
                                     <Button variant="contained" color="primary" className={classes.button} onClick={buyMenu}>
-                                        Comprar
+                                        {t("Buy")}
                                     </Button>
                                 </Grid>
                                 </Grid>

@@ -8,6 +8,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
+import Container from "../components/MapContainer";
+
 
 class Users extends Component{
 
@@ -169,12 +171,13 @@ class Users extends Component{
                         <Grid item xs={12}>
                             <TextField
                                 required
+                                disabled
                                 id="mail"
                                 name="mail"
                                 label={i18n.t('Mail.label')}
                                 fullWidth
                                 autoComplete="email"
-                                onChange={this.handleChange}
+                                value="unMailFijoQueMeTraeAuth0"
                                 noValidate
                             />
                         </Grid>
@@ -269,6 +272,8 @@ class Users extends Component{
                             />
                         </Grid>
                     </Grid>
+                    <Container />
+
                     <Button
                         variant="contained"
                         color="primary"

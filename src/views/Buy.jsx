@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import '../dist/css/App.css';
 import SearchIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import InputBase from "@material-ui/core/InputBase";
