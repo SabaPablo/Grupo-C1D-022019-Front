@@ -9,9 +9,6 @@ import i18n from "./i18n";
 import theme from "./theme";
 import { Auth0Provider } from "./react-auth0-spa";
 import history from "./utils/history";
-import config from "./auth_config.json";
-
-
 
 const onRedirectCallback = appState => {
     history.push(
@@ -26,12 +23,11 @@ ReactDOM.render(
         <I18nextProvider i18n={i18n}>
             <MuiThemeProvider theme={theme}>
                 <Auth0Provider
-                    domain={config.domain}
-                    client_id={config.clientId}
+                    domain={process.env.REACT_APP_AUTH0_DOMAIN}
+                    client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
                     redirect_uri={window.location.origin}
                     onRedirectCallback={onRedirectCallback}
                 >
-
                     <App/>
                 </Auth0Provider>,
             </MuiThemeProvider>
