@@ -35,6 +35,9 @@ import OrderForm from "./OrderForm";
 import axios from "axios";
 import Profile from "../views/Profile";
 import {useAuth0} from "../react-auth0-spa";
+import history from "../utils/history";
+import {useTranslation} from "react-i18next";
+
 
 const drawerWidth = 240;
 
@@ -183,10 +186,10 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-
-export default function MiniDrawer(props) {
+const MiniDrawer = ()  => {
     const classes = useStyles();
     const theme = useTheme();
+    const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
     const [creditAmount, setCreditAmount ] = React.useState(0);
     const { logout } = useAuth0();
@@ -207,15 +210,15 @@ export default function MiniDrawer(props) {
         setOpen(false);
     };
     const goToHome = () => {
-        props.history.push(`/home`);
+        history.push(`/home`);
 
     };
     const goToSell = () => {
-        props.history.push(`/sell`);
+        history.push(`/sell`);
 
     };
     const goToProfile = () => {
-        props.history.push(`/profile`);
+        history.push(`/profile`);
 
     };
 
@@ -224,21 +227,21 @@ export default function MiniDrawer(props) {
             returnTo: window.location.origin
         });
     const goToConfig = () => {
-        props.history.push(`/config`);
+        history.push(`/config`);
 
     };
     const goToCredit = () => {
-        props.history.push(`/credit`);
+        history.push(`/credit`);
 
     };
     const goToBuy = () => {
-        props.history.push(`/cart`);
+        history.push(`/cart`);
     };
     const goOut = () => {
         logoutWithRedirect()
         sessionStorage.setItem('login', 'off');
         sessionStorage.setItem('user_id', '0');
-        props.history.push(`/login`);
+        history.push(`/login`);
     };
 
     const { user } = useAuth0();
@@ -302,45 +305,45 @@ export default function MiniDrawer(props) {
                 <Divider />
                 <List>
                     { [
-                        <ListItem button key={'Inicio'}
+                        <ListItem button key={t('Start')}
                                   onClick={goToHome}
                         >
                             <ListItemIcon>
                                 <HomeIcon onClick={goToHome} />
                             </ListItemIcon>
-                            <ListItemText primary={'Inicio'} />
+                            <ListItemText primary={t('Start')} />
                         </ListItem>,
-                        <ListItem button key={'Perfil'}
+                        <ListItem button key={t("Profile")}
                                   onClick={goToProfile}
                         >
                             <ListItemIcon>
                                 <PersonIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Perfil'} />
+                            <ListItemText primary={t("Profile")} />
                         </ListItem>,
-                        <ListItem button key={'Compras'}
+                        <ListItem button key={t("Purchases")}
                                   onClick={goToBuy}
                         >
                             <ListItemIcon>
                             <ShoppingCartIcon />
                             </ListItemIcon>
-                        <ListItemText primary={'Compras'} />
+                        <ListItemText primary={t("Purchases")} />
                         </ListItem>,
-                        <ListItem button key={'Ventas'}
+                        <ListItem button key={t("Sells")}
                                   onClick={goToSell}
                         >
                             <ListItemIcon>
                                 <ShoppingBasketIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Ventas'} />
+                            <ListItemText primary={t("Sells")} />
                         </ListItem>,
-                        <ListItem button key={'Credito'}
+                        <ListItem button key={t("Credit")}
                                   onClick={goToCredit}
                         >
                             <ListItemIcon>
                                 <LocalAtmIcon />
                             </ListItemIcon>
-                            <ListItemText primary={'Credito'} />
+                            <ListItemText primary={t("Credit")} />
                         </ListItem>,
 
                         ]
@@ -349,7 +352,7 @@ export default function MiniDrawer(props) {
                 </List>
                 <Divider />
                 <List>
-                    {['Configuración', 'Cerrar sesión'].map((text, index) => (
+                    {[t("Configuration"), t("CloseSession")].map((text, index) => (
                         <ListItem button key={text}
                                   onClick={index %2 === 0 ? goToConfig: goOut}
                         >
@@ -380,4 +383,6 @@ export default function MiniDrawer(props) {
 
         </div>
     );
-}
+};
+
+export default MiniDrawer;
