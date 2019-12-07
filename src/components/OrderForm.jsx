@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
  const OrderForm = (params) => {
-     const { t, i18n } = useTranslation();
+     const { t } = useTranslation();
      let purchase = {
          idClient: sessionStorage.getItem('user_id'),
          deliveryDate: null,

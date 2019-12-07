@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 function MenuCard({ menu }) {
 
     const classes = useStyles();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const buyMenu = () => {
         history.push(`/order/${menu.id}`);
