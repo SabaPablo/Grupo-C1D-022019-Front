@@ -9,9 +9,6 @@ import i18n from "./i18n";
 import theme from "./theme";
 import { Auth0Provider } from "./react-auth0-spa";
 import history from "./utils/history";
-import config from "./auth_config.json";
-
-
 
 const onRedirectCallback = appState => {
     history.push(
@@ -31,7 +28,6 @@ ReactDOM.render(
                     redirect_uri={window.location.origin}
                     onRedirectCallback={onRedirectCallback}
                 >
-
                     <App/>
                 </Auth0Provider>,
             </MuiThemeProvider>
