@@ -69,9 +69,6 @@ function MenuCard({ menu }) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                    Ver
-                </Button>
                 <Button
                     size="small"
                     color="primary"

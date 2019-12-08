@@ -5,12 +5,12 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
-import i18n from "../i18n"
 import moment from "moment";
 import MultipleSelect from "./MultipleSelect";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import history from "../utils/history";
+import { withTranslation } from 'react-i18next';
 
 class MenuForm extends Component{
     state = {
@@ -154,8 +154,9 @@ class MenuForm extends Component{
     };
 
     createMenu = () => {
+        const { t } = this.props
         if (this.thereAreErrors()) {
-            NotificationManager.error(i18n.t('MenuErrorCreation.label'), i18n.t('MenuErrorCreationDate.label'), 3000, () => {
+            NotificationManager.error(t('MenuErrorCreation'), t('MenuErrorCreationDate'), 3000, () => {
                 alert('callback');
             });
         } else {
@@ -170,13 +171,13 @@ class MenuForm extends Component{
             })
                 .then(res => {
                     if (res.ok) {
-                        NotificationManager.success( i18n.t('MenuSuccessCreate.label'));
+                        NotificationManager.success( t('MenuSuccessCreate'));
                         const data = res.json();
                         //this.cleanForm();
                         history.push('/sell');
                         return data;
                     } else {
-                        NotificationManager.error(i18n.t('ConnetionError.label'), 'Upsss!!!', 5000, () => {
+                        NotificationManager.error(t('ConnetionError'), 'Upsss!!!', 5000, () => {
                             alert('callback');
                         });
                         throw Error(res.statusText);
@@ -197,11 +198,12 @@ class MenuForm extends Component{
     };
 
     render(){
+        const { t } = this.props;
         return (
             <div>
                 <React.Fragment>
                     <Typography variant="h6" gutterBottom>
-                        {i18n.t('MenuRegister.label')}
+                        {t('MenuRegister')}
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
@@ -210,7 +212,7 @@ class MenuForm extends Component{
                                 required
                                 id="name"
                                 name="name"
-                                label={i18n.t("FirstName.label")}
+                                label={t("FirstName")}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -227,7 +229,7 @@ class MenuForm extends Component{
                                 required
                                 id="description"
                                 name="description"
-                                label={i18n.t("Description.label")}
+                                label={t("Description")}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -239,7 +241,7 @@ class MenuForm extends Component{
                                 required
                                 id="price"
                                 name="price"
-                                label={i18n.t('Price.label')}
+                                label={t('Price')}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -252,7 +254,7 @@ class MenuForm extends Component{
                                 required
                                 id="cantMaxPeerDay"
                                 name="cantMaxPeerDay"
-                                label={i18n.t('MaxQuantityPerDay.label')}
+                                label={t('MaxQuantityPerDay')}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -265,7 +267,7 @@ class MenuForm extends Component{
                                 required
                                 id="cantMin"
                                 name="cantMin"
-                                label={i18n.t('MinQuantity.label')}
+                                label={t('MinQuantity')}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -278,7 +280,7 @@ class MenuForm extends Component{
                                 required
                                 id="priceMin"
                                 name="priceMin"
-                                label={i18n.t("PriceCantMin.label")}
+                                label={t("PriceCantMin")}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -290,7 +292,7 @@ class MenuForm extends Component{
                                 error = {this.state.errors.cantMax !== ''}
                                 id="cantMax"
                                 name="cantMax"
-                                label={i18n.t("MaxQuantity.label")}
+                                label={t("MaxQuantity")}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -302,7 +304,7 @@ class MenuForm extends Component{
                                 error = {this.state.errors.priceMax !== ''}
                                 id="priceMax"
                                 name="priceMax"
-                                label={i18n.t("PriceCantMax.label")}
+                                label={t("PriceCantMax")}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -314,7 +316,7 @@ class MenuForm extends Component{
                                 error = {this.state.errors.priceDelivery !== ''}
                                 id="priceDelivery"
                                 name="priceDelivery"
-                                label={i18n.t("DeliveryValue.label")}
+                                label={t("DeliveryValue")}
                                 fullWidth
                                 onChange={this.handleChange}
                                 noValidate
@@ -326,14 +328,14 @@ class MenuForm extends Component{
                                 required
                                 id="urlImage"
                                 name="urlImage"
-                                label={i18n.t("UrlImage.label")}
+                                label={t("UrlImage")}
                                 onChange={this.handleChange}
                                 fullWidth
                                 noValidate
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <label> {i18n.t("dateInit.label")} </label>
+                            <label> {t("dateInit")} </label>
                             <TextField
                                 error = {this.state.errors.dateInit !== ''}
                                 required
@@ -346,7 +348,7 @@ class MenuForm extends Component{
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <label> {i18n.t("dateEnd.label")} </label>
+                            <label> {t("dateEnd")} </label>
                             <TextField
                                 error = {this.state.errors.dateEnd !== ''}
                                 required
@@ -365,7 +367,7 @@ class MenuForm extends Component{
                         color="primary"
                         onClick={this.createMenu}
                         className={classes.button}>
-                        {i18n.t('AddMenu.label')}
+                        {t('AddMenu')}
                     </Button>
                 </React.Fragment>
                 <NotificationContainer/>
@@ -374,4 +376,4 @@ class MenuForm extends Component{
     }
 
 }
-export default MenuForm;
+export default withTranslation()(MenuForm);
