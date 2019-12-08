@@ -11,24 +11,10 @@ import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 import i18n from "../i18n";
+import {useTranslation} from "react-i18next";
 
-const suggestions = [
-    { label: i18n.t("FastFood.label") },
-    { label: i18n.t("Fish.label") },
-    { label: i18n.t("Grill.label") },
-    { label: i18n.t("Pizza.label") },
-    { label: i18n.t("Pasta.label") },
-    { label: i18n.t("Vegan.label") },
-    { label: i18n.t("Vegetarian.label") },
-    { label: i18n.t("Dessert.label") },
-    { label: i18n.t("Drink.label") },
-    { label: i18n.t("Beer.label") },
-    { label: i18n.t("Wine.label") },
 
-].map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label,
-}));
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -325,14 +311,16 @@ const components = {
     ValueContainer,
 };
 
-export default function IntegrationReactSelect(props) {
+const IntegrationReactSelect = (props) =>  {
     const classes = useStyles();
     const theme = useTheme();
     const [multi, setMulti] = React.useState(null);
+    const { t } = useTranslation();
+
 
 
     const handleChangeMulti = value => {
-        props.onChangeMulti(value)
+        props.onChangeMulti(value);
         setMulti(value);
     };
 
@@ -346,6 +334,24 @@ export default function IntegrationReactSelect(props) {
         }),
     };
 
+    const suggestions = [
+        t("FastFood") ,
+        t("Fish"),
+        t("Grill"),
+        t("Pizza"),
+        t("Pasta"),
+        t("Vegan"),
+        t("Vegetarian"),
+        t("Dessert"),
+        t("Drink"),
+        t("Beer"),
+        t("Wine"),
+
+    ].map(suggestion => ({
+        value: suggestion,
+        label: suggestion,
+    }));
+
     return (
         <div>
             <NoSsr>
@@ -354,13 +360,13 @@ export default function IntegrationReactSelect(props) {
                     styles={selectStyles}
                     inputId="react-select-multiple"
                     TextFieldProps={{
-                        label: i18n.t('Categories.label'),
+                        label:t('Categories'),
                         InputLabelProps: {
                             htmlFor: 'react-select-multiple',
                             shrink: true,
                         },
                     }}
-                    placeholder= { i18n.t('CategoriesMultiSelect.label') }
+                    placeholder= { i18n.t('CategoriesMultiSelect') }
                     options={suggestions}
                     components={components}
                     value={multi}
@@ -371,3 +377,7 @@ export default function IntegrationReactSelect(props) {
         </div>
     );
 }
+
+
+
+export default IntegrationReactSelect;
