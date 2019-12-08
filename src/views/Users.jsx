@@ -40,8 +40,8 @@ class Users extends Component{
     }
 
     addMail = (mail) => {
-        this.setState({mail: mail}, ()=> {
-        })
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state.mail = mail
     };
 
     handleChange = (event) => {
