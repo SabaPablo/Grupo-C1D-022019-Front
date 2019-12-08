@@ -40,7 +40,8 @@ class Users extends Component{
     }
 
     addMail = (mail) => {
-        this.state.mail = mail
+        this.setState({mail: mail}, ()=> {
+        })
     };
 
     handleChange = (event) => {
