@@ -148,16 +148,28 @@ const useStyles = makeStyles(theme => ({
             body: JSON.stringify(purchase)
         })
             .then(res => {
+                console.log(res);
                 if (res.ok) {
+
                     NotificationManager.success(t('MenuSuccessCreate'));
-                    return res.json();
-                } else {
+                    return res.json()
+                } else if(res.status === 409) {
+                    NotificationManager.error(t('Saldo insuficiente'), 'Upsss!!!', 5000, () => {
+                        alert('callback');
+                    });
+                    throw Error(res.statusText);
+
+                }else {
                     NotificationManager.error(t('ConnetionError'), 'Upsss!!!', 5000, () => {
                         alert('callback');
                     });
                     throw Error(res.statusText);
+
                 }
-            })
+            }).then(data => {
+            console.log(params);
+            params.setCredit(data.credit)
+        })
             .catch(error => console.error(error));
     };
 

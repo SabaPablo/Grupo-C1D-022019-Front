@@ -374,7 +374,7 @@ const MiniDrawer = ()  => {
                         <PrivateRoute exact path="/credit" component={()=><Credits setCredit={setCreditAmount}/>} />
                         <PrivateRoute exact path="/menu/add" component={MenuForm} />
                         <PrivateRoute exact path="/profile" component={Profile} />
-                        <PrivateRoute exact path="/order/:number" component={OrderForm} />
+                        <PrivateRoute exact path="/order/:number" component={(props)=> <OrderForm setCredit={setCreditAmount}{...props}/>} />
                         <PrivateRoute exact path="/contacts" component={Contact} />
 
                     </Switch>
