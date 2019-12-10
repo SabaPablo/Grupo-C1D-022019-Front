@@ -8,8 +8,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import classes from "@material-ui/core/ListItem/ListItem";
 import i18n from "../i18n"
-import Container from "../components/MapContainer";
-
+import MapContainer from "../components/MapContainer";
+import Geocode from "react-geocode";
 
 class Users extends Component{
 
@@ -37,6 +37,10 @@ class Users extends Component{
                 zip: '',
                 country: '',
                 password: '',
+            },
+            gcode:{
+                lat: 0,
+                long: 0
             }
         };
     }
@@ -112,6 +116,7 @@ class Users extends Component{
     };
 
     createUser = () => {
+        this.getGeoCode();
         fetch((process.env.REACT_APP_API_URL || 'http://localhost:8080') + "/api/clients", {
 
             method: "POST",
@@ -135,6 +140,32 @@ class Users extends Component{
                 });
             })
             .catch(error => console.error(error));    };
+
+    getGeoCode = () =>{
+        Geocode.setApiKey(process.env.REACT_APP_GMAP_KEY);
+
+        Geocode.setLanguage("en");
+
+        // set response region. Its optional.
+        // A Geocoding request with region=es (Spain) will return the Spanish city.
+        Geocode.setRegion("ar");
+
+        // Enable or disable logs. Its optional.
+        Geocode.enableDebug();
+        Geocode.fromAddress("Mitre 914 Quilmes").then(
+            response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                this.state.gcode.lat = lat;
+                this.state.gcode.long = lng;
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    };
+
+
+
 
     render(){
         return (
@@ -272,7 +303,7 @@ class Users extends Component{
                             />
                         </Grid>
                     </Grid>
-                    <Container />
+                    <MapContainer gcode={this.state.gcode}/>
 
                     <Button
                         variant="contained"
