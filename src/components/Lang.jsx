@@ -30,7 +30,7 @@ const LangSelection = () => {
     return (
         <div>
             <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-native-simple">{t('Language.label')}</InputLabel>
+                <InputLabel htmlFor="age-native-simple">{t('Language')}</InputLabel>
                 <Select
                     native
                     value={lang}

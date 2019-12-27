@@ -21,6 +21,7 @@ import Box from "@material-ui/core/Box";
 import Rating from '@material-ui/lab/Rating';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import {useTranslation} from "react-i18next";
+import history from "../utils/history";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -150,11 +151,11 @@ const useStyles = makeStyles(theme => ({
             .then(res => {
                 console.log(res);
                 if (res.ok) {
+                history.push('/cart');
 
-                    NotificationManager.success(t('MenuSuccessCreate'));
                     return res.json()
                 } else if(res.status === 409) {
-                    NotificationManager.error(t('Saldo insuficiente'), 'Upsss!!!', 5000, () => {
+                    NotificationManager.error(t('notFunds'), 'Upsss!!!', 5000, () => {
                         alert('callback');
                     });
                     throw Error(res.statusText);
@@ -167,13 +168,19 @@ const useStyles = makeStyles(theme => ({
 
                 }
             }).then(data => {
-            console.log(params);
             params.setCredit(data.credit)
         })
             .catch(error => console.error(error));
     };
 
-    return (
+     const setRating = () => {
+         const cant = menu.rate.length;
+         var sum = 0;
+         menu.rate.forEach(element => sum += element)
+         console.log(sum/cant);
+         return sum/cant;
+     };
+     return (
         <div className={classes.root}>
             <NotificationContainer/>
 
@@ -198,7 +205,7 @@ const useStyles = makeStyles(theme => ({
                                     <Grid item xs={12}>
                                         <Box component="fieldset" mb={3} borderColor="transparent">
                                             <Typography component="legend">Valoración</Typography>
-                                            <Rating value={menu.rate} readOnly />
+                                            <Rating value={setRating()} readOnly />
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12}>
